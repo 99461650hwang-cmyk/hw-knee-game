@@ -7,12 +7,11 @@
     <title>무릎 연골 지킴이: 내 동작은 무릎에 얼마나 무리를 줄까요?</title>
     <meta name="description" content="일상생활 및 운동 중 무릎 관절에 가해지는 각도별 부담과 위험도를 계산하고, 더 많이 vs 더 적게 퀴즈 게임으로 무릎 수명을 늘려보세요.">
     
-    <!-- 카카오톡, 페이스북 등 외부 링크 공유 시 노출되는 오픈그래프(OG) 메타태그 -->
+    <!-- 외부 링크 공유 시 노출되는 오픈그래프(OG) 메타태그 -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="무릎 연골 지킴이: 내 무릎 건강 테스트">
     <meta property="og:description" content="양반다리가 가벼운 달리깃길보다 더 위험하다? 30가지 일상행동의 무릎 부담도를 맞춰보세요!">
     <meta property="og:image" content="https://placehold.co/1200x630/0d9488/ffffff?text=Knee+Cartilage+Guard">
-    <meta property="og:url" content="https://knee-guard.netlify.app">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -68,59 +67,72 @@
 <body class="text-slate-800 min-h-screen flex flex-col selection:bg-teal-200 selection:text-slate-900 overflow-x-hidden">
 
     <header class="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40 transition-all duration-300 shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 py-4 md:py-5 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3.5">
-                <div class="w-12 h-12 bg-gradient-to-tr from-teal-500 to-emerald-400 rounded-2xl flex items-center justify-center shadow-md shadow-teal-500/10">
-                    <i class="fa-solid fa-bone text-white text-2xl"></i>
+        <div class="max-w-6xl mx-auto px-4 py-3 md:py-5 flex flex-col md:flex-row justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-tr from-teal-500 to-emerald-400 rounded-2xl flex items-center justify-center shadow-md shadow-teal-500/10">
+                    <i class="fa-solid fa-bone text-white text-xl md:text-2xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">무릎 연골 지킴이</h1>
-                    <p class="text-xs md:text-sm text-slate-500 font-semibold">내가 평소에 하는 자세와 운동은 무릎에 얼마나 무리를 줄까요?</p>
+                    <h1 class="text-xl md:text-3xl font-black text-slate-900 tracking-tight">무릎 연골 지킴이</h1>
+                    <p class="text-[10px] md:text-sm text-slate-500 font-semibold">내가 평소에 하는 자세와 운동은 무릎에 얼마나 무리를 줄까요?</p>
                 </div>
             </div>
             
-            <div class="flex items-center gap-3 w-full md:w-auto justify-center">
-                <button onclick="copyShareLink()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 rounded-xl text-sm font-bold border border-slate-200 transition-colors flex items-center gap-2" title="친구에게 이 사이트 공유하기">
+            <div class="flex items-center gap-2 w-full md:w-auto justify-center">
+                <button onclick="copyShareLink()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 rounded-xl text-xs md:text-sm font-bold border border-slate-200 transition-colors flex items-center gap-1.5" title="친구에게 이 사이트 공유하기">
                     <i class="fa-solid fa-share-nodes text-teal-600"></i> 주소 복사하기
                 </button>
             </div>
         </div>
 
-        <!-- 메인 네비게이션 탭 바 (크고 명확한 글씨와 터치 공간) -->
-        <div class="border-t border-slate-100 bg-slate-50 py-2">
+        <!-- 메인 네비게이션 탭 바 -->
+        <div class="border-t border-slate-100 bg-slate-50 py-1.5">
             <div class="max-w-6xl mx-auto px-4 flex justify-center">
-                <nav class="flex w-full md:w-auto bg-slate-200/60 p-1.5 rounded-2xl border border-slate-200">
-                    <button onclick="switchTab('game')" id="tab-game" class="nav-tab flex-1 md:flex-initial px-6 py-3 rounded-xl text-lg font-extrabold transition-all duration-300 bg-teal-600 text-white shadow-md">
-                        <i class="fa-solid fa-gamepad mr-2"></i> 퀴즈 게임
+                <nav class="flex w-full md:w-auto bg-slate-200/60 p-1 rounded-2xl border border-slate-200">
+                    <button onclick="switchTab('game')" id="tab-game" class="nav-tab flex-1 md:flex-initial px-4 md:px-6 py-2.5 md:py-3 rounded-xl text-sm md:text-lg font-extrabold transition-all duration-300 bg-teal-600 text-white shadow-md">
+                        <i class="fa-solid fa-gamepad mr-1 md:mr-2"></i> 퀴즈 게임
                     </button>
-                    <button onclick="switchTab('chart')" id="tab-chart" class="nav-tab flex-1 md:flex-initial px-6 py-3 rounded-xl text-lg font-extrabold transition-all duration-300 text-slate-600 hover:text-slate-900 hover:bg-white/50">
-                        <i class="fa-solid fa-chart-line mr-2"></i> 무릎 부담 분포표
+                    <button onclick="switchTab('chart')" id="tab-chart" class="nav-tab flex-1 md:flex-initial px-4 md:px-6 py-2.5 md:py-3 rounded-xl text-sm md:text-lg font-extrabold transition-all duration-300 text-slate-600 hover:text-slate-900 hover:bg-white/50">
+                        <i class="fa-solid fa-chart-line mr-1 md:mr-2"></i> 무릎 부담 분포표
                     </button>
-                    <button onclick="switchTab('dictionary')" id="tab-dictionary" class="nav-tab flex-1 md:flex-initial px-6 py-3 rounded-xl text-lg font-extrabold transition-all duration-300 text-slate-600 hover:text-slate-900 hover:bg-white/50">
-                        <i class="fa-solid fa-book-medical mr-2"></i> 무릎 연골 사전 (30선)
+                    <button onclick="switchTab('dictionary')" id="tab-dictionary" class="nav-tab flex-1 md:flex-initial px-4 md:px-6 py-2.5 md:py-3 rounded-xl text-sm md:text-lg font-extrabold transition-all duration-300 text-slate-600 hover:text-slate-900 hover:bg-white/50">
+                        <i class="fa-solid fa-book-medical mr-1 md:mr-2"></i> 무릎 연골 사전
                     </button>
                 </nav>
             </div>
         </div>
     </header>
 
-    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6 md:py-10 flex flex-col justify-start">
+    <main class="flex-grow max-w-6xl w-full mx-auto px-3 md:px-4 py-4 md:py-10 flex flex-col justify-start">
         
         <!-- ==================== GAME TAB ==================== -->
-        <section id="panel-game" class="tab-panel block space-y-8 animate-fade-in">
+        <section id="panel-game" class="tab-panel block space-y-6 md:space-y-8 animate-fade-in">
+            <!-- 무릎 각도 학습 목적 핵심 가이드 배너 -->
+            <div class="bg-gradient-to-r from-teal-50 to-emerald-50 border-2 border-teal-200 rounded-3xl p-4 md:p-6 shadow-sm flex flex-col md:flex-row items-start gap-3 md:gap-4">
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-teal-500/10 rounded-2xl flex items-center justify-center text-teal-600 flex-shrink-0">
+                    <i class="fa-solid fa-circle-question text-xl md:text-2xl"></i>
+                </div>
+                <div class="space-y-1">
+                    <h4 class="text-base md:text-xl font-black text-teal-900">💡 왜 무릎 각도를 주의 깊게 보아야 할까요?</h4>
+                    <p class="text-xs md:text-base text-slate-700 leading-relaxed font-semibold">
+                        무릎이 구부러지는 <strong>각도가 커질수록</strong> 허벅지 근육이 강하게 당겨지며, 앞쪽 덮개뼈인 <strong>'무릎뼈'가 무릎 연골을 맷돌처럼 압박</strong>합니다. 많이 구부릴수록 마찰 면적과 압박이 커져서 연골이 마모되는 속도가 훨씬 빨라집니다!
+                    </p>
+                </div>
+            </div>
+
             <!-- 최고 기록 및 기회 현황판 -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white border border-slate-200 p-5 rounded-3xl flex items-center justify-between shadow-sm">
-                    <span class="text-slate-500 text-lg font-bold"><i class="fa-solid fa-fire text-orange-500 mr-2.5 text-xl animate-bounce"></i>현재 연속 성공</span>
-                    <span id="game-streak" class="text-3xl font-black text-amber-500 tracking-wider">0</span>
+            <div class="grid grid-cols-3 gap-3 md:gap-6">
+                <div class="bg-white border border-slate-200 p-3 md:p-5 rounded-2xl md:rounded-3xl flex flex-col md:flex-row items-center justify-between shadow-sm text-center md:text-left">
+                    <span class="text-slate-500 text-xs md:text-lg font-bold"><i class="fa-solid fa-fire text-orange-500 md:mr-2 text-sm md:text-xl animate-bounce"></i>연속 성공</span>
+                    <span id="game-streak" class="text-xl md:text-3xl font-black text-amber-500 tracking-wider mt-1 md:mt-0">0</span>
                 </div>
-                <div class="bg-white border border-slate-200 p-5 rounded-3xl flex items-center justify-between shadow-sm">
-                    <span class="text-slate-500 text-lg font-bold"><i class="fa-solid fa-crown text-yellow-500 mr-2.5 text-xl"></i>내 최고 기록</span>
-                    <span id="game-high-score" class="text-3xl font-black text-yellow-600 tracking-wider">0</span>
+                <div class="bg-white border border-slate-200 p-3 md:p-5 rounded-2xl md:rounded-3xl flex flex-col md:flex-row items-center justify-between shadow-sm text-center md:text-left">
+                    <span class="text-slate-500 text-xs md:text-lg font-bold"><i class="fa-solid fa-crown text-yellow-500 md:mr-2 text-sm md:text-xl"></i>최고 기록</span>
+                    <span id="game-high-score" class="text-xl md:text-3xl font-black text-yellow-600 tracking-wider mt-1 md:mt-0">0</span>
                 </div>
-                <div class="bg-white border border-slate-200 p-5 rounded-3xl flex items-center justify-between shadow-sm">
-                    <span class="text-slate-500 text-lg font-bold"><i class="fa-solid fa-heart-crack text-rose-500 mr-2.5 text-xl"></i>남은 기회</span>
-                    <div id="game-lives" class="flex gap-2 text-rose-500 text-2xl">
+                <div class="bg-white border border-slate-200 p-3 md:p-5 rounded-2xl md:rounded-3xl flex flex-col md:flex-row items-center justify-between shadow-sm text-center md:text-left">
+                    <span class="text-slate-500 text-xs md:text-lg font-bold"><i class="fa-solid fa-heart-crack text-rose-500 md:mr-2 text-sm md:text-xl"></i>남은 기회</span>
+                    <div id="game-lives" class="flex gap-1 md:gap-2 text-rose-500 text-sm md:text-2xl mt-1 md:mt-0 justify-center">
                         <i class="fa-solid fa-heart"></i>
                         <i class="fa-solid fa-heart"></i>
                         <i class="fa-solid fa-heart"></i>
@@ -129,124 +141,120 @@
             </div>
 
             <!-- 게임 메인 카드 영역 -->
-            <div class="relative bg-white rounded-3xl border border-slate-200 p-6 md:p-10 shadow-md overflow-hidden min-h-[520px] flex flex-col justify-center">
-                <!-- 감각적인 배경 간접 조명 연출 -->
+            <div class="relative bg-white rounded-3xl border border-slate-200 p-3 md:p-10 shadow-md overflow-hidden min-h-[460px] md:min-h-[520px] flex flex-col justify-center">
+                <!-- 배경 연출 -->
                 <div class="absolute -right-24 -bottom-24 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="absolute -left-24 -top-24 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
                 <!-- 게임 대기 화면 -->
-                <div id="game-screen-start" class="text-center max-w-2xl mx-auto space-y-7 py-8">
-                    <div class="inline-flex p-6 bg-teal-50 text-teal-600 rounded-3xl border border-teal-100 text-6xl mb-2">
+                <div id="game-screen-start" class="text-center max-w-2xl mx-auto space-y-5 md:space-y-7 py-6 md:py-8">
+                    <div class="inline-flex p-4 md:p-6 bg-teal-50 text-teal-600 rounded-3xl border border-teal-100 text-4xl md:text-6xl">
                         <i class="fa-solid fa-arrows-up-down"></i>
                     </div>
-                    <h2 class="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">어떤 행동이 무릎에 더 해로울까요?</h2>
-                    <p class="text-slate-600 leading-relaxed text-lg md:text-xl font-medium">
-                        평소에 자주 하는 30가지 행동이 무릎에 주는 실제 부담을 직접 맞춰보세요!<br>
-                        왼쪽 행동보다 오른쪽 행동의 무릎 위험도가 <strong class="text-rose-600 font-extrabold underline decoration-rose-300">더 높을지(위험)</strong>, 아니면 <strong class="text-emerald-600 font-extrabold underline decoration-emerald-300">더 낮을지(안전)</strong> 맞히는 재밌는 상식 퀴즈 게임입니다.
+                    <h2 class="text-2xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">어떤 행동이 무릎에 더 해로울까요?</h2>
+                    <p class="text-slate-600 leading-relaxed text-sm md:text-xl font-medium px-2">
+                        평소 자주 하는 30가지 행동이 무릎에 주는 실제 부담을 직접 맞춰보세요!<br class="hidden md:inline">
+                        왼쪽 행동보다 오른쪽 행동의 무릎 위험도가 <strong class="text-rose-600 font-extrabold underline decoration-rose-300">더 높을지(위험)</strong>, 아니면 <strong class="text-emerald-600 font-extrabold underline decoration-emerald-300">더 낮을지(안전)</strong> 맞히는 상식 퀴즈 게임입니다.
                     </p>
-                    <button onclick="startGame()" class="px-12 py-5 bg-gradient-to-r from-teal-600 to-emerald-500 text-white font-black rounded-2xl text-2xl hover:brightness-105 shadow-lg shadow-teal-500/20 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 w-full sm:w-auto">
-                        퀴즈 시작하기 <i class="fa-solid fa-play ml-2"></i>
+                    <button onclick="startGame()" class="px-8 py-4 md:px-12 md:py-5 bg-gradient-to-r from-teal-600 to-emerald-500 text-white font-black rounded-2xl text-lg md:text-2xl hover:brightness-105 shadow-lg shadow-teal-500/20 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 w-full sm:w-auto">
+                        퀴즈 시작하기 <i class="fa-solid fa-play ml-1.5"></i>
                     </button>
                 </div>
 
-                <!-- 게임 진행 화면 -->
-                <div id="game-screen-play" class="hidden grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+                <!-- 게임 진행 화면 (모바일과 PC 모두 동일하게 좌우로 가로 고정 구성) -->
+                <div id="game-screen-play" class="hidden grid grid-cols-2 gap-3 md:gap-8 relative z-10">
                     
                     <!-- 왼쪽 카드: 기준 행동 -->
-                    <div id="card-left" class="bg-slate-50 border-2 border-slate-200 rounded-3xl p-6 md:p-8 flex flex-col justify-between min-h-[420px] relative overflow-hidden transition-all duration-500 shadow-sm">
-                        <div class="absolute top-4 left-4 px-4 py-1.5 bg-slate-200 rounded-xl text-xs md:text-sm text-teal-800 font-black uppercase tracking-wider" id="left-category">일상</div>
-                        <div class="text-center my-auto space-y-4 pt-6">
-                            <p class="text-slate-500 text-sm font-semibold">기준 행동</p>
-                            <h3 id="left-title" class="text-2xl md:text-3xl font-black text-slate-900 min-h-[80px] flex items-center justify-center leading-snug px-2">천천히 산책하듯 걷기</h3>
-                            <div class="inline-block px-4 py-1.5 bg-white rounded-full border border-slate-200 text-sm md:text-base text-slate-700 font-bold">
-                                무릎 각도: <span id="left-angle" class="font-black text-teal-600 text-lg">15</span>°
+                    <div id="card-left" class="bg-slate-50 border-2 border-slate-200 rounded-2xl md:rounded-3xl p-3 md:p-8 flex flex-col justify-between min-h-[360px] md:min-h-[500px] relative overflow-hidden transition-all duration-500 shadow-sm">
+                        <div class="absolute top-2.5 left-2.5 px-2 md:px-4 py-1 bg-slate-200 rounded-lg md:rounded-xl text-[10px] md:text-sm text-teal-800 font-black uppercase tracking-wider" id="left-category">일상</div>
+                        <div class="text-center my-auto space-y-3 md:space-y-4 pt-6 md:pt-8">
+                            <p class="text-slate-400 text-[10px] md:text-sm font-semibold uppercase tracking-wider">기준 행동</p>
+                            
+                            <!-- 모션 그래픽/아이콘 컨테이너 -->
+                            <div class="flex justify-center items-center h-12 md:h-20" id="left-motion-img">
+                                <!-- SVG 동적 주입 -->
                             </div>
-                            <!-- 무릎 상태 시각화 장치 -->
-                            <div class="flex justify-center my-3">
-                                <svg class="w-32 h-32 text-slate-400" viewBox="0 0 100 100" id="left-knee-svg"></svg>
-                            </div>
-                            <p id="left-desc" class="text-slate-600 text-base max-w-sm mx-auto leading-relaxed min-h-[60px] font-medium">무릎에 가해지는 부담이 매우 적고 안전한 걷기 운동입니다.</p>
+
+                            <h3 id="left-title" class="text-sm md:text-2xl font-black text-slate-900 min-h-[64px] md:min-h-[90px] flex items-center justify-center leading-snug px-1 text-center">천천히 산책하듯 걷기</h3>
                         </div>
-                        <div class="text-center border-t border-slate-200 pt-5">
-                            <span class="text-slate-500 text-sm font-bold block mb-1">이 행동의 무릎 부담 점수</span>
-                            <span id="left-score" class="text-5xl md:text-6xl font-black text-teal-600">15<span class="text-2xl font-normal text-slate-500 ml-1">점</span></span>
+                        <div class="text-center border-t border-slate-200 pt-3 md:pt-5">
+                            <span class="text-slate-500 text-[10px] md:text-sm font-bold block mb-0.5">이 행동의 무릎 부담 점수</span>
+                            <span id="left-score" class="text-2xl md:text-6xl font-black text-teal-600">15<span class="text-sm md:text-2xl font-normal text-slate-500 ml-0.5">점</span></span>
                         </div>
                     </div>
 
                     <!-- 오른쪽 카드: 비교 및 선택 행동 -->
-                    <div id="card-right" class="bg-slate-50 border-2 border-slate-200 rounded-3xl p-6 md:p-8 flex flex-col justify-between min-h-[420px] relative overflow-hidden transition-all duration-500 shadow-sm">
-                        <div class="absolute top-4 left-4 px-4 py-1.5 bg-slate-200 rounded-xl text-xs md:text-sm text-amber-800 font-black uppercase tracking-wider" id="right-category">운동</div>
-                        <div class="text-center my-auto space-y-4 pt-6">
-                            <p class="text-slate-500 text-sm font-semibold">비교 행동</p>
-                            <h3 id="right-title" class="text-2xl md:text-3xl font-black text-slate-900 min-h-[80px] flex items-center justify-center leading-snug px-2">아파트 계단 올라가기</h3>
-                            <div class="inline-block px-4 py-1.5 bg-white rounded-full border border-slate-200 text-sm md:text-base text-slate-700 font-bold">
-                                무릎 각도: <span id="right-angle" class="font-black text-teal-600 text-lg">50</span>°
+                    <div id="card-right" class="bg-slate-50 border-2 border-slate-200 rounded-2xl md:rounded-3xl p-3 md:p-8 flex flex-col justify-between min-h-[360px] md:min-h-[500px] relative overflow-hidden transition-all duration-500 shadow-sm">
+                        <div class="absolute top-2.5 left-2.5 px-2 md:px-4 py-1 bg-slate-200 rounded-lg md:rounded-xl text-[10px] md:text-sm text-amber-800 font-black uppercase tracking-wider" id="right-category">운동</div>
+                        <div class="text-center my-auto space-y-3 md:space-y-4 pt-6 md:pt-8">
+                            <p class="text-slate-400 text-[10px] md:text-sm font-semibold uppercase tracking-wider">비교 행동</p>
+                            
+                            <!-- 모션 그래픽/아이콘 컨테이너 -->
+                            <div class="flex justify-center items-center h-12 md:h-20" id="right-motion-img">
+                                <!-- SVG 동적 주입 -->
                             </div>
-                            <!-- 무릎 상태 시각화 장치 -->
-                            <div class="flex justify-center my-3">
-                                <svg class="w-32 h-32 text-slate-400" viewBox="0 0 100 100" id="right-knee-svg"></svg>
-                            </div>
-                            <p id="right-desc" class="text-slate-600 text-base max-w-sm mx-auto leading-relaxed min-h-[60px] font-medium">계단을 디뎌 짚을 때 순간적으로 무릎 안쪽 관절에 부담이 늘어납니다.</p>
+
+                            <h3 id="right-title" class="text-sm md:text-2xl font-black text-slate-900 min-h-[64px] md:min-h-[90px] flex items-center justify-center leading-snug px-1 text-center">아파트 계단 올라가기</h3>
                         </div>
                         
                         <!-- 선택 버튼 컨트롤 영역 -->
-                        <div class="space-y-4 pt-5 border-t border-slate-200">
-                            <span class="text-slate-700 text-base font-extrabold block text-center">오른쪽 행동은 왼쪽보다 무릎에?</span>
-                            <div class="grid grid-cols-2 gap-4" id="game-controls">
-                                <button onclick="makeGuess('higher')" class="flex flex-col items-center justify-center p-4 bg-rose-50 hover:bg-rose-100 border-2 border-rose-200 hover:border-rose-400 rounded-2xl text-rose-600 font-black transition-all duration-200 shadow-sm active:scale-95 group">
-                                    <i class="fa-solid fa-circle-chevron-up text-3xl mb-1.5 group-hover:-translate-y-1 transition-transform"></i>
-                                    <span class="text-xl">더 위험해요!</span>
-                                    <span class="text-xs text-rose-500/70 font-bold">(부담 점수가 높음)</span>
+                        <div class="space-y-2.5 md:space-y-4 pt-3 md:pt-5 border-t border-slate-200">
+                            <span class="text-slate-700 text-[10px] md:text-base font-extrabold block text-center">오른쪽 행동은 왼쪽보다 무릎에?</span>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4" id="game-controls">
+                                <button onclick="makeGuess('higher')" class="flex flex-col items-center justify-center p-2 md:p-4 bg-rose-50 hover:bg-rose-100 border border-rose-200 hover:border-rose-400 rounded-xl md:rounded-2xl text-rose-600 font-black transition-all duration-200 shadow-sm active:scale-95 group">
+                                    <i class="fa-solid fa-circle-chevron-up text-lg md:text-3xl mb-1 md:mb-1.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                                    <span class="text-xs md:text-xl">더 위험해요!</span>
+                                    <span class="text-[8px] md:text-xs text-rose-500/70 font-bold">(점수 높음)</span>
                                 </button>
-                                <button onclick="makeGuess('lower')" class="flex flex-col items-center justify-center p-4 bg-emerald-50 hover:bg-emerald-100 border-2 border-emerald-200 hover:border-emerald-400 rounded-2xl text-emerald-600 font-black transition-all duration-200 shadow-sm active:scale-95 group">
-                                    <i class="fa-solid fa-circle-chevron-down text-3xl mb-1.5 group-hover:translate-y-1 transition-transform"></i>
-                                    <span class="text-xl">더 안전해요!</span>
-                                    <span class="text-xs text-emerald-500/70 font-bold">(부담 점수가 낮음)</span>
+                                <button onclick="makeGuess('lower')" class="flex flex-col items-center justify-center p-2 md:p-4 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 hover:border-emerald-400 rounded-xl md:rounded-2xl text-emerald-600 font-black transition-all duration-200 shadow-sm active:scale-95 group">
+                                    <i class="fa-solid fa-circle-chevron-down text-lg md:text-3xl mb-1 md:mb-1.5 group-hover:translate-y-0.5 transition-transform"></i>
+                                    <span class="text-xs md:text-xl">더 안전해요!</span>
+                                    <span class="text-[8px] md:text-xs text-emerald-500/70 font-bold">(점수 낮음)</span>
                                 </button>
                             </div>
                             <!-- 정답 판정 후 수치 카운팅 연출 -->
-                            <div id="right-score-reveal" class="hidden text-center text-5xl md:text-6xl font-black text-amber-600 py-2.5 transition-all duration-300">
-                                ?? <span class="text-xl font-normal text-slate-500 ml-1">점</span>
+                            <div id="right-score-reveal" class="hidden text-center text-2xl md:text-6xl font-black text-amber-600 py-1 md:py-2.5 transition-all duration-300">
+                                ?? <span class="text-sm md:text-2xl font-normal text-slate-500 ml-0.5">점</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- 중간 장식 엠블럼 -->
-                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white border-4 border-slate-200 rounded-full hidden md:flex items-center justify-center font-black text-lg text-slate-500 z-20 shadow-md">
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 md:w-16 md:h-16 bg-white border-2 md:border-4 border-slate-200 rounded-full flex items-center justify-center font-black text-xs md:text-lg text-slate-500 z-20 shadow-md">
                         VS
                     </div>
                 </div>
 
                 <!-- 게임오버 화면 -->
-                <div id="game-screen-over" class="hidden text-center max-w-lg mx-auto space-y-7 py-8">
-                    <div class="inline-flex p-5 bg-rose-50 text-rose-500 rounded-full border border-rose-100 text-5xl mb-1">
+                <div id="game-screen-over" class="hidden text-center max-w-lg mx-auto space-y-5 md:space-y-7 py-6 md:py-8">
+                    <div class="inline-flex p-4 bg-rose-50 text-rose-500 rounded-full border border-rose-100 text-3xl md:text-5xl mb-1">
                         <i class="fa-solid fa-heart-crack animate-bounce"></i>
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-black tracking-tight text-rose-600">무릎에 무리가 많이 갔습니다!</h2>
-                    <div class="bg-slate-50 border border-slate-200 p-6 rounded-3xl text-left space-y-4 shadow-inner">
-                        <div class="flex justify-between items-center text-lg border-b border-slate-200 pb-3">
+                    <h2 class="text-2xl md:text-4xl font-black tracking-tight text-rose-600">무릎에 무리가 많이 갔습니다!</h2>
+                    <div class="bg-slate-50 border border-slate-200 p-4 md:p-6 rounded-2xl md:rounded-3xl text-left space-y-3 md:space-y-4 shadow-inner">
+                        <div class="flex justify-between items-center text-sm md:text-lg border-b border-slate-200 pb-2.5">
                             <span class="text-slate-600 font-bold">최종 연속 정답</span>
-                            <span id="final-streak" class="text-2xl font-black text-amber-500">0회</span>
+                            <span id="final-streak" class="text-lg md:text-2xl font-black text-amber-500">0회</span>
                         </div>
-                        <div class="flex justify-between items-center text-lg border-b border-slate-200 pb-3">
+                        <div class="flex justify-between items-center text-sm md:text-lg border-b border-slate-200 pb-2.5">
                             <span class="text-slate-600 font-bold">내 역대 최고 연승</span>
-                            <span id="final-best" class="text-2xl font-black text-slate-700">0</span>
+                            <span id="final-best" class="text-lg md:text-2xl font-black text-slate-700">0</span>
                         </div>
-                        <div class="flex justify-between items-center text-lg">
+                        <div class="flex justify-between items-center text-sm md:text-lg">
                             <span class="text-slate-600 font-bold">나의 무릎 연골 지킴이 등급</span>
-                            <span id="game-grade" class="text-xl font-black text-teal-600">무릎 새싹</span>
+                            <span id="game-grade" class="text-base md:text-xl font-black text-teal-600">무릎 새싹</span>
                         </div>
-                        <p id="game-feedback" class="text-base text-slate-500 leading-relaxed pt-2 font-medium">
+                        <p id="game-feedback" class="text-xs md:text-base text-slate-500 leading-relaxed pt-1.5 font-medium">
                             평소 무심코 하던 잘못된 자세들이 소중한 무릎 연골을 조용히 지치게 만듭니다. '무릎 부담 분포표' 탭을 눌러 무릎 각도에 따른 위험 순위를 다시 배워보세요!
                         </p>
                     </div>
                     
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button onclick="startGame()" class="flex-1 px-6 py-5 bg-gradient-to-r from-teal-600 to-emerald-500 text-white font-black rounded-2xl text-xl hover:brightness-105 shadow-md transition-all duration-200">
-                            <i class="fa-solid fa-arrows-rotate mr-2"></i> 다시 시작하기
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <button onclick="startGame()" class="flex-1 px-5 py-4 bg-gradient-to-r from-teal-600 to-emerald-500 text-white font-black rounded-xl md:rounded-2xl text-base md:text-xl hover:brightness-105 shadow-md transition-all duration-200">
+                            <i class="fa-solid fa-arrows-rotate mr-1.5"></i> 다시 시작하기
                         </button>
-                        <button onclick="switchTab('chart')" class="flex-1 px-6 py-5 bg-slate-200 hover:bg-slate-300 text-slate-800 font-black rounded-2xl text-xl transition-all duration-200">
-                            <i class="fa-solid fa-chart-line mr-2"></i> 분포표 확인하기
+                        <button onclick="switchTab('chart')" class="flex-1 px-5 py-4 bg-slate-200 hover:bg-slate-300 text-slate-800 font-black rounded-xl md:rounded-2xl text-base md:text-xl transition-all duration-200">
+                            <i class="fa-solid fa-chart-line mr-1.5"></i> 분포표 확인하기
                         </button>
                     </div>
                 </div>
@@ -255,17 +263,17 @@
         </section>
 
         <!-- ==================== CHART TAB ==================== -->
-        <section id="panel-chart" class="tab-panel hidden space-y-8 animate-fade-in">
-            <div class="bg-white border border-slate-200 p-6 md:p-8 rounded-3xl space-y-6 shadow-sm">
+        <section id="panel-chart" class="tab-panel hidden space-y-6 md:space-y-8 animate-fade-in">
+            <div class="bg-white border border-slate-200 p-4 md:p-8 rounded-3xl space-y-6 shadow-sm">
                 
                 <!-- 일상생활 초고위험 동작 경고창 -->
-                <div class="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-300 rounded-3xl p-6 flex flex-col md:flex-row items-start md:items-center gap-5 shadow-sm">
-                    <div class="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center flex-shrink-0 text-amber-600">
-                        <i class="fa-solid fa-circle-exclamation text-3xl animate-pulse"></i>
+                <div class="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-300 rounded-3xl p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-5 shadow-sm">
+                    <div class="w-12 h-12 md:w-14 md:h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center flex-shrink-0 text-amber-600">
+                        <i class="fa-solid fa-circle-exclamation text-2xl md:text-3xl animate-pulse"></i>
                     </div>
                     <div class="space-y-1">
-                        <h3 class="text-xl font-black text-amber-900 tracking-tight">⚠️ 꼭 알아두세요! 일상생활 자세의 대반전</h3>
-                        <p class="text-base text-slate-700 leading-relaxed font-semibold">
+                        <h3 class="text-base md:text-xl font-black text-amber-900 tracking-tight">⚠️ 꼭 알아두세요! 일상생활 자세의 대반전</h3>
+                        <p class="text-xs md:text-base text-slate-700 leading-relaxed font-semibold">
                             과격한 운동만 무릎에 해로울까요? <span class="text-rose-600 font-black">전혀 아닙니다!</span> 
                             아래 분포표의 높은 구간을 확인해 보세요. 방바닥에 <strong class="text-rose-600 font-black">쪼그려 앉거나(55점)</strong>, 편하다고 자주 하는 <strong class="text-rose-600 font-black">양반다리(60점)</strong> 같은 일상 자세가 가벼운 <strong class="text-teal-600 font-black">조깅(43점)보다 훨씬 더 연골을 닳게 만듭니다!</strong>
                         </p>
@@ -274,30 +282,30 @@
 
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
                     <div>
-                        <h2 class="text-2xl md:text-3xl font-black text-slate-900 flex items-center gap-2.5">
-                            <span class="w-2.5 h-8 bg-teal-500 rounded-full inline-block"></span>
+                        <h2 class="text-xl md:text-3xl font-black text-slate-900 flex items-center gap-2">
+                            <span class="w-2 h-6 md:w-2.5 md:h-8 bg-teal-500 rounded-full inline-block"></span>
                             무릎 각도별 연골 부담 분포표
                         </h2>
-                        <p class="text-sm md:text-base text-slate-500 mt-1 font-medium">가로축: 무릎이 굽혀지는 각도 (도, °) | 세로축: 연골 부담 위험 점수 (0~100점)</p>
+                        <p class="text-xs md:text-base text-slate-500 mt-1 font-medium">가로축: 무릎이 굽혀지는 각도 (도, °) | 세로축: 연골 부담 위험 점수 (0~100점)</p>
                     </div>
                     
                     <!-- 등급 설명 범례 -->
-                    <div class="flex flex-wrap gap-2 text-xs md:text-sm">
-                        <span class="px-3 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-xl flex items-center gap-1.5 font-bold">
-                            <span class="w-3 h-3 rounded-full bg-emerald-500"></span> 안전 (낮은 부담)
+                    <div class="flex flex-wrap gap-1.5 text-[10px] md:text-sm">
+                        <span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-lg flex items-center gap-1 font-bold">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> 안전 (낮은 부담)
                         </span>
-                        <span class="px-3 py-1.5 bg-amber-50 text-amber-700 border border-amber-100 rounded-xl flex items-center gap-1.5 font-bold">
-                            <span class="w-3 h-3 rounded-full bg-amber-500"></span> 주의 (관리 필요)
+                        <span class="px-2.5 py-1 bg-amber-50 text-amber-700 border border-amber-100 rounded-lg flex items-center gap-1 font-bold">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> 주의 (관리 필요)
                         </span>
-                        <span class="px-3 py-1.5 bg-rose-50 text-rose-700 border border-rose-100 rounded-xl flex items-center gap-1.5 font-bold">
-                            <span class="w-3 h-3 rounded-full bg-rose-500"></span> 위험 (연골 마모 유발)
+                        <span class="px-2.5 py-1 bg-rose-50 text-rose-700 border border-rose-100 rounded-lg flex items-center gap-1 font-bold">
+                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> 위험 (연골 마모 유발)
                         </span>
                     </div>
                 </div>
 
                 <!-- 분산형 차트 그래픽 영역 -->
-                <div class="bg-slate-50 p-4 md:p-6 rounded-3xl border border-slate-200 relative overflow-hidden shadow-inner">
-                    <div class="absolute top-3 left-5 text-xs text-slate-400 font-bold uppercase tracking-wider pointer-events-none">무릎 각도와 하중 분포도 (구슬을 누르면 자세한 설명창이 뜹니다!)</div>
+                <div class="bg-slate-50 p-3 md:p-6 rounded-3xl border border-slate-200 relative overflow-hidden shadow-inner">
+                    <div class="absolute top-2.5 left-4 text-[10px] text-slate-400 font-bold uppercase tracking-wider pointer-events-none">무릎 각도와 하중 분포도 (구슬을 누르면 자세한 설명창이 뜹니다!)</div>
                     
                     <!-- 반응형 SVG 차트 공간 -->
                     <div class="w-full h-0 pb-[65%] relative" id="chart-container">
@@ -307,13 +315,13 @@
                     </div>
                 </div>
 
-                <div class="border-t border-slate-200 pt-5 text-base text-slate-500 space-y-3 font-medium">
-                    <p class="flex items-start gap-2 leading-relaxed">
-                        <i class="fa-solid fa-circle-info text-teal-500 mt-1 text-lg"></i>
+                <div class="border-t border-slate-200 pt-5 text-xs md:text-base text-slate-500 space-y-2.5 md:space-y-3 font-medium">
+                    <p class="flex items-start gap-1.5 leading-relaxed">
+                        <i class="fa-solid fa-circle-info text-teal-500 mt-0.5 md:mt-1 text-sm md:text-lg flex-shrink-0"></i>
                         <span><strong>💡 기본 원리:</strong> 무릎을 많이 굽힐수록(X축 오른쪽으로 갈수록) 관절 사이가 좁아지고 연골이 서로 비벼지면서 압박 수치와 부담 점수가 급격하게 올라갑니다.</span>
                     </p>
-                    <p class="flex items-start gap-2 leading-relaxed">
-                        <i class="fa-solid fa-triangle-exclamation text-rose-500 mt-1 text-lg"></i>
+                    <p class="flex items-start gap-1.5 leading-relaxed">
+                        <i class="fa-solid fa-triangle-exclamation text-rose-500 mt-0.5 md:mt-1 text-sm md:text-lg flex-shrink-0"></i>
                         <span><strong>⚠️ 예외 상황 (지면 충격):</strong> 줄넘기(90점)나 농구 착지(85점)는 무릎이 많이 굽혀지진 않지만, 땅에서 올라오는 강력한 충격파가 무릎 관절로 직접 전달되어 부담 점수가 크게 나타납니다.</span>
                     </p>
                 </div>
@@ -322,23 +330,23 @@
 
         <!-- ==================== DICTIONARY TAB ==================== -->
         <section id="panel-dictionary" class="tab-panel hidden space-y-6 animate-fade-in">
-            <div class="bg-white border border-slate-200 p-6 md:p-8 rounded-3xl space-y-6 shadow-sm">
+            <div class="bg-white border border-slate-200 p-4 md:p-8 rounded-3xl space-y-6 shadow-sm">
                 <!-- 검색창 및 카테고리 필터 영역 -->
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 border-b border-slate-100 pb-5">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
                     <div>
-                        <h2 class="text-2xl md:text-3xl font-black text-slate-900 flex items-center gap-2.5">
-                            <span class="w-2.5 h-8 bg-teal-500 rounded-full inline-block"></span>
+                        <h2 class="text-xl md:text-3xl font-black text-slate-900 flex items-center gap-2">
+                            <span class="w-2 h-6 md:w-2.5 md:h-8 bg-teal-500 rounded-full inline-block"></span>
                             무릎 연골 사전 (30가지 행동)
                         </h2>
-                        <p class="text-sm md:text-base text-slate-500 mt-1 font-medium">평소 본인이 자주 하는 습관이나 운동을 검색해 무릎 관절 안전 상태를 확인해 보세요.</p>
+                        <p class="text-xs md:text-base text-slate-500 mt-1 font-medium">평소 본인이 자주 하는 습관이나 운동을 검색해 무릎 관절 안전 상태를 확인해 보세요.</p>
                     </div>
                     
-                    <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex flex-col sm:flex-row gap-2.5">
                         <div class="relative w-full sm:w-72">
-                            <input type="text" id="dict-search-input" onkeyup="filterDictionary()" placeholder="동작 이름 검색 (예: 걷기, 스쿼트, 계단)..." class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3.5 text-base text-slate-800 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all font-bold">
-                            <i class="fa-solid fa-magnifying-glass absolute right-4 top-4 text-slate-400"></i>
+                            <input type="text" id="dict-search-input" onkeyup="filterDictionary()" placeholder="동작 이름 검색 (예: 걷기, 스쿼트)..." class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl px-4 py-2.5 md:py-3 text-sm md:text-base text-slate-800 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all font-bold">
+                            <i class="fa-solid fa-magnifying-glass absolute right-4 top-3 md:top-3.5 text-slate-400"></i>
                         </div>
-                        <select id="dict-category-filter" onchange="filterDictionary()" class="bg-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3.5 text-base font-extrabold text-slate-700 focus:outline-none focus:border-teal-500">
+                        <select id="dict-category-filter" onchange="filterDictionary()" class="bg-slate-50 border-2 border-slate-200 rounded-xl px-4 py-2.5 md:py-3 text-sm md:text-base font-extrabold text-slate-700 focus:outline-none focus:border-teal-500">
                             <option value="all">모든 행동 보기</option>
                             <option value="일상">일상생활 자세만</option>
                             <option value="운동">운동/스포츠 동작만</option>
@@ -347,7 +355,7 @@
                 </div>
 
                 <!-- 사전 리스트 그리드 -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="dict-grid">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" id="dict-grid">
                     <!-- 동적 카드 렌더링 -->
                 </div>
             </div>
@@ -357,66 +365,77 @@
 
     <!-- ==================== INTERACTIVE DETAIL POPUP MODAL ==================== -->
     <div id="detail-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onclick="closeDetailModal()">
-        <div class="bg-white rounded-3xl border-2 border-slate-200 w-full max-w-xl shadow-2xl p-6 md:p-8 space-y-6 animate-modal-pop relative" onclick="event.stopPropagation()">
+        <div class="bg-white rounded-3xl border-2 border-slate-200 w-full max-w-xl shadow-2xl p-5 md:p-8 space-y-5 md:space-y-6 animate-modal-pop relative max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
             <!-- 닫기 버튼 -->
-            <button onclick="closeDetailModal()" class="absolute top-4 right-4 w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 rounded-full flex items-center justify-center transition-all">
+            <button onclick="closeDetailModal()" class="absolute top-4 right-4 w-9 h-9 bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 rounded-full flex items-center justify-center transition-all">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
 
             <!-- 상단 상태 배지 -->
             <div class="flex items-center gap-2">
-                <span id="popup-category" class="px-3.5 py-1.5 border rounded-xl text-sm font-black uppercase font-bold">일상생활</span>
-                <span id="popup-warning-badge" class="hidden px-3.5 py-1.5 bg-rose-50 text-rose-700 text-xs md:text-sm font-extrabold rounded-xl border border-rose-200 flex items-center gap-1">
+                <span id="popup-category" class="px-3 py-1 border rounded-lg text-xs md:text-sm font-black uppercase font-bold">일상생활</span>
+                <span id="popup-warning-badge" class="hidden px-3 py-1 bg-rose-50 text-rose-700 text-[10px] md:text-sm font-extrabold rounded-lg border border-rose-200 flex items-center gap-1">
                     <i class="fa-solid fa-circle-exclamation"></i> 주의 등급 행동
                 </span>
             </div>
 
-            <!-- 제목 및 무릎 상태 시각화 -->
-            <div class="space-y-2">
-                <h3 id="popup-title" class="text-2xl md:text-3xl font-black text-slate-900 leading-snug"></h3>
-                <p class="text-sm md:text-base text-slate-400 font-bold">선택하신 무릎 행동의 분석 정보입니다.</p>
+            <!-- 제목 및 안내문 -->
+            <div class="space-y-1.5">
+                <h3 id="popup-title" class="text-xl md:text-3xl font-black text-slate-900 leading-snug"></h3>
+                <p class="text-xs md:text-base text-slate-400 font-bold">선택하신 무릎 행동의 분석 정보입니다.</p>
             </div>
 
             <!-- 핵심 부담 지표 박스 -->
-            <div class="grid grid-cols-2 gap-4 text-base">
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
-                    <span class="text-slate-400 block text-xs md:text-sm font-bold mb-1">무릎 꺾임 각도</span>
-                    <span id="popup-angle" class="text-2xl md:text-3xl font-black text-amber-600">30°</span>
+            <div class="grid grid-cols-2 gap-3 md:gap-4 text-sm md:text-base">
+                <div class="bg-slate-50 p-3 md:p-4 rounded-xl md:rounded-2xl border border-slate-200 text-center">
+                    <span class="text-slate-400 block text-[10px] md:text-sm font-bold mb-1">무릎 접힘 각도</span>
+                    <span id="popup-angle" class="text-xl md:text-3xl font-black text-amber-600">30°</span>
                 </div>
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
-                    <span class="text-slate-400 block text-xs md:text-sm font-bold mb-1">연골 부담 위험 점수</span>
-                    <span id="popup-score" class="text-2xl md:text-3xl font-black text-rose-500">40점</span>
+                <div class="bg-slate-50 p-3 md:p-4 rounded-xl md:rounded-2xl border border-slate-200 text-center">
+                    <span class="text-slate-400 block text-[10px] md:text-sm font-bold mb-1">연골 부담 위험 점수</span>
+                    <span id="popup-score" class="text-xl md:text-3xl font-black text-rose-500">40점</span>
                 </div>
             </div>
 
-            <!-- 무릎 연골 모형 visual -->
-            <div class="bg-teal-50/40 p-4 rounded-2xl border border-teal-100 flex flex-col items-center">
-                <span class="text-xs text-teal-800/80 font-black mb-3 uppercase tracking-wider flex items-center gap-1.5">
-                    <i class="fa-solid fa-magnifying-glass-chart"></i> 관절 하중 긴장 시뮬레이터
+            <!-- 무릎 관절 및 각도 시뮬레이터 Visual (상세 팝업에서는 유지됨) -->
+            <div class="bg-slate-50 p-4 md:p-5 rounded-2xl border border-slate-200 flex flex-col items-center">
+                <span class="text-[10px] md:text-xs text-slate-500 font-black mb-3 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i> 정밀 관절 구조 및 각도 측정기
                 </span>
-                <svg class="w-40 h-40" viewBox="0 0 100 100" id="popup-knee-svg"></svg>
+                <!-- SVG를 이용한 정교해진 무릎 골격 시각화 장치 -->
+                <svg class="w-36 h-36 md:w-44 md:h-44 bg-white border border-slate-200 rounded-2xl p-2 shadow-inner" viewBox="0 0 100 100" id="popup-knee-svg"></svg>
+            </div>
+
+            <!-- 각도와 하중 원리 상세 설명 블록 -->
+            <div class="bg-teal-50/70 border border-teal-200 p-3.5 rounded-2xl space-y-1">
+                <h5 class="text-teal-900 font-black text-xs md:text-sm flex items-center gap-1.5">
+                    <i class="fa-solid fa-calculator"></i> 관절 하중 역학 원리
+                </h5>
+                <p class="text-[11px] md:text-sm text-slate-700 leading-relaxed font-semibold">
+                    무릎을 쫙 편 상태(0°)에 가깝게 쓸수록 덮개뼈 마찰이 현저하게 줄어들어 연골이 잘 보존됩니다. 반면 각도가 굽혀질수록 덮개뼈가 연골판을 무겁게 내리누르게 되며, 각도가 완만한데도 점수가 높다면 점프나 착지 시 무릎 관절로 쏟아지는 수직 충격 에너지가 원인입니다.
+                </p>
             </div>
 
             <!-- 설명글 -->
-            <p id="popup-desc" class="text-base md:text-lg text-slate-700 leading-relaxed bg-slate-50 p-5 rounded-2xl border border-slate-200 font-semibold"></p>
+            <p id="popup-desc" class="text-sm md:text-lg text-slate-700 leading-relaxed bg-slate-50 p-4 md:p-5 rounded-2xl border border-slate-200 font-semibold"></p>
 
-            <button onclick="closeDetailModal()" class="w-full py-4 bg-slate-800 hover:bg-slate-900 text-white font-extrabold rounded-2xl text-lg transition-colors shadow-md">
+            <button onclick="closeDetailModal()" class="w-full py-3.5 bg-slate-800 hover:bg-slate-900 text-white font-extrabold rounded-2xl text-base md:text-lg transition-colors shadow-md">
                 확인하고 닫기
             </button>
         </div>
     </div>
 
     <!-- 주소 복사 안내용 토스트 알림창 -->
-    <div id="toast-message" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white px-6 py-4 rounded-2xl text-base font-extrabold shadow-xl z-50 flex items-center gap-2.5 transition-all duration-300">
-        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+    <div id="toast-message" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white px-5 py-3.5 rounded-2xl text-sm md:text-base font-extrabold shadow-xl z-50 flex items-center gap-2 transition-all duration-300">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-base md:text-lg"></i>
         <span id="toast-text">복사 완료</span>
     </div>
 
     <!-- 하단 푸터 -->
-    <footer class="mt-auto border-t border-slate-200 bg-white py-10 text-center text-sm text-slate-500 shadow-inner">
-        <div class="max-w-6xl mx-auto px-4 space-y-3 font-medium">
-            <p class="text-slate-600 text-base">※ 본 척도표의 위험 부담은 정형외과 및 인체역학 연구 데이터를 응용하여 가공한 교육용 점수입니다.</p>
-            <p class="text-slate-400 text-xs md:text-sm">&copy; 2026 무릎 연골 지킴이 프로젝트. 올바른 자세가 내 무릎 수명을 늘립니다.</p>
+    <footer class="mt-auto border-t border-slate-200 bg-white py-8 text-center text-xs md:text-sm text-slate-500 shadow-inner">
+        <div class="max-w-6xl mx-auto px-4 space-y-2 font-medium">
+            <p class="text-slate-600 text-xs md:text-base">※ 본 척도표의 위험 부담은 정형외과 및 인체역학 연구 데이터를 응용하여 가공한 교육용 점수입니다.</p>
+            <p class="text-slate-400 text-[10px] md:text-sm">&copy; 2026 무릎 연골 지킴이 프로젝트. 올바른 자세가 내 무릎 수명을 늘립니다.</p>
         </div>
     </footer>
 
@@ -459,45 +478,45 @@
                     osc.stop(audioCtx.currentTime + 0.08);
                 }
             } catch (e) {
-                console.warn("효과음 가이드 장치 비활성화 상태.", e);
+                console.warn("효과음 장치 비활성화 상태.", e);
             }
         }
     </script>
 
     <!-- 코어 앱 데이터셋 및 로직 구성 -->
     <script>
-        // 무릎 연골의 관절 꺾임 및 부담을 표현한 친근하고 쉬운 한글 데이터셋
+        // 무릎 연골의 관절 꺾임 및 부담을 표현한 직관적인 한글 데이터셋 (30가지 행동)
         const kneeData = [
-            { score: 3, category: "일상", title: "침대에 똑바로 누워 다리만 위로 들어 올리기", angle: 0, desc: "무릎에 체중이 전혀 실리지 않아, 무릎 수술 후 재활 치료 시 가장 먼저 권장하는 매우 안전한 운동입니다." },
-            { score: 4, category: "운동", title: "물속에서 힘을 빼고 편안하게 발차기하기", angle: 10, desc: "물의 부력 덕분에 무릎 연골이 서로 부딪쳐 닳는 부담 없이, 무릎 주변 근육을 안전하게 단련해 줍니다." },
-            { score: 5, category: "일상", title: "침대에 바르게 누워 편하게 쉬기", angle: 0, desc: "체중 부담이 전신으로 완벽히 분산되어 무릎 관절이 압박에서 벗어나 완전히 휴식하는 상태입니다." },
-            { score: 7, category: "운동", title: "실내 자전거 안장에 앉아 가볍게 페달 밟기", angle: 70, desc: "엉덩이가 체중을 대부분 지탱해 주기 때문에 무릎 연골 손상 걱정 없이 허벅지 근육을 키울 수 있는 최고의 유산소 운동입니다." },
-            { score: 10, category: "일상", title: "소파에 엉덩이를 깊숙이 밀어 넣고 편하게 앉기", angle: 90, desc: "체중의 대부분을 소파 쿠션이 받쳐주어 무릎 관절이 받는 부담이 거의 없는 아주 편안한 자세입니다." },
-            { score: 15, category: "일상", title: "집안이나 마당을 차분하게 산책하듯 걷기", angle: 15, desc: "발뒤꿈치부터 가볍게 디디며 걷기 때문에 무릎에 전달되는 충격이 매우 적고 안전합니다." },
-            { score: 18, category: "운동", title: "수영장 물속에서 사뿐사뿐 걷기", angle: 20, desc: "물의 저항과 부력 덕분에 관절에 무리가 거의 없어, 무릎 통증이 있거나 관절이 약한 어르신들께 적극 추천하는 회복 운동입니다." },
-            { score: 20, category: "일상", title: "일반적인 속도로 평지 걷기 (마트, 동네 보도블록)", angle: 20, desc: "왼발과 오른발이 번갈아 땅을 디디며 일상적인 체중 부하를 골고루 나누어 가지는 가장 표준적인 행동입니다." },
-            { score: 23, category: "일상", title: "의자에서 손을 짚지 않고 한 번에 일어나기", angle: 80, desc: "허벅지 앞쪽 근육이 순간적으로 힘을 쓰면서 무릎뼈와 연골 주위에 짧지만 확실한 긴장감이 전달됩니다." },
-            { score: 25, category: "운동", title: "헬스장 일립티컬 기구(공중 걷기) 페달 돌리기", angle: 40, desc: "달리기와 달리 양발이 발판에서 떨어지지 않은 채 부드럽게 움직이므로, 땅을 디딜 때 생기는 무릎 충격이 전혀 없습니다." },
-            { score: 27, category: "일상", title: "완만한 내리막길을 천천히 내려가기", angle: 25, desc: "몸이 앞으로 쏠리지 않도록 다리 근육이 브레이크를 걸면서 무릎 관절 앞쪽에 지탱하는 힘이 슬슬 들어갑니다." },
-            { score: 30, category: "운동", title: "무릎을 반만 굽히는 하프 스쿼트 운동", angle: 60, desc: "안전한 범위 내에서 무릎을 절반만 굽히는 스쿼트로, 무릎 주변의 근력을 키우는 데 매우 훌륭한 하체 운동입니다." },
-            { score: 33, category: "일상", title: "계단을 한 칸씩 천천히 올라가기", angle: 50, desc: "허벅지와 엉덩이 힘으로 온몸을 위로 밀어 올려야 하므로, 순간적으로 무릎 안쪽 관절에 부담이 집중됩니다." },
-            { score: 35, category: "운동", title: "약간 숨이 찰 정도로 빠르게 걷기 (파워 워킹)", angle: 22, desc: "속도가 빨라진 만큼 뒤꿈치가 땅에 닿는 충격이 커지며, 무릎 연골이 받아내는 부담도 소폭 증가합니다." },
-            { score: 40, category: "일상", title: "지하철이나 아파트 계단 내려가기", angle: 60, desc: "내려갈 때는 중력이 아래로 쏠려 무릎이 체중의 5배에 달하는 충격을 견뎌야 하므로, 오를 때보다 관절에 훨씬 해롭습니다." },
-            { score: 43, category: "운동", title: "우레탄 트랙이나 흙길에서 가볍게 뛰기 (조깅)", angle: 35, desc: "양발이 공중에 떴다가 번갈아 바닥을 디딜 때 발생하는 충격이 완충 트랙에서도 고스란히 무릎으로 전달됩니다." },
-            { score: 45, category: "운동", title: "다리를 앞으로 넓게 벌려 앉았다 일어서기 (런지)", angle: 90, desc: "몸무게의 대부분을 한쪽 무릎으로만 받아내야 하므로, 올바른 자세를 유지하지 않으면 연골에 큰 자극을 주는 까다로운 운동입니다." },
-            { score: 50, category: "운동", title: "자전거를 탈 때 안장에서 엉덩이를 떼고 서서 오르막 오르기", angle: 80, desc: "온몸의 무게를 페달을 누르는 다리 하나에 완전히 실어야 하므로, 무릎 안쪽 뼈와 연골에 큰 압박이 가해집니다." },
-            { score: 55, category: "일상", title: "방바닥에 쪼그려 앉아서 바닥 닦기", angle: 140, desc: "무릎이 끝까지 완전히 접힌 상태에서 무게까지 실려 연골이 강하게 짓눌리게 됩니다. 연골판 건강을 직접적으로 해치는 최악의 자세입니다." },
-            { score: 60, category: "일상", title: "방바닥에 편히 앉는다며 양반다리 하기", angle: 120, desc: "무릎을 옆으로 꺾고 안쪽으로 비틀어 앉는 불균형한 자세로, 관절 안쪽 연골만 집중적으로 비벼서 닳게 만드는 한국식 좌식 생활의 주범입니다." },
-            { score: 63, category: "운동", title: "시멘트나 아스팔트 바닥 위를 빠르게 달리기", angle: 40, desc: "흙길과 달리 딱딱한 시멘트 바닥은 착지할 때의 충격을 그대로 튕겨내어 무릎 뼈와 연골을 망치질하듯 직접 강타합니다." },
-            { score: 68, category: "운동", title: "무거운 배낭을 메고 등산로 내려오기 (하산)", angle: 65, desc: "몸무게에 무거운 짐 무게가 더해진 채 경사면을 따라 아래로 디디므로, 한 걸음 내려올 때마다 무릎 연골이 맷돌처럼 무겁게 짓눌립니다." },
-            { score: 70, category: "운동", title: "어깨에 무거운 바벨을 메고 스쿼트 운동하기", angle: 90, desc: "무거운 쇠무게까지 어깨에 얹고 주저앉았다 일어나므로, 무릎 뼈와 뼈 사이에 있는 완충 연골이 엄청난 고압으로 압착됩니다." },
-            { score: 73, category: "운동", title: "배드민턴이나 테니스 경기 중 공을 받으려 급정거하기", angle: 75, desc: "빠르게 달리다 급격히 방향을 틀어 미끄러지듯 멈출 때, 엄청난 충격과 함께 무릎 관절이 순간적으로 뒤틀립니다." },
-            { score: 77, category: "운동", title: "빠르고 격렬한 댄스나 에어로빅 운동하기", angle: 80, desc: "쉴 새 없이 점프하고 방향을 바꾸며 땅을 디뎌야 하므로, 관절에 지속적인 진동 충격이 가고 연골판을 미세하게 파열시킬 위험이 큽니다." },
-            { score: 80, category: "운동", title: "축구 경기 중 디딤발을 축으로 몸을 급격히 돌리기", angle: 85, desc: "잔디에 신발이 고정된 상태에서 몸을 급회전할 때 무릎이 완전히 돌아가므로, 관절 내부 연골판과 십자인대를 맷돌처럼 갈아내는 치명적인 충격이 가해집니다." },
-            { score: 85, category: "운동", title: "농구 점프 슛 이후 맨땅으로 쿵 착지하기", angle: 90, desc: "높이 뛰어올랐다가 중력으로 인해 떨어질 때 발생하는 엄청난 낙하 에너지를 무릎 관절이 고스란히 혼자 흡수하므로 한순간에 파열될 수 있습니다." },
-            { score: 90, category: "운동", title: "시멘트 바닥에서 빠른 속도로 줄넘기하기", angle: 30, desc: "높이 뛰지 않아 안전해 보이지만, 단단한 바닥에 1초에 수차례 반복적으로 착지하면서 피로 충격이 누적되어 미세 연골 파열을 일으키기 쉽습니다." },
-            { score: 95, category: "운동", title: "엉덩이가 뒤꿈치에 닿을 정도로 완전히 깊게 앉는 스쿼트", angle: 130, desc: "무릎이 완전히 접힌 한계 상태에서는 연골 가장자리가 관절 뼈 사이에 강력하게 끼여 찝히게 되며, 이때 펴는 힘이 가해지면 연골판이 쉽게 찢어집니다." },
-            { score: 100, category: "운동", title: "높은 곳에서 단단한 맨바닥으로 뛰어내리기", angle: 100, desc: "완충장치 없이 한 번에 착지할 때 뼈끼리 세게 부딪쳐 미세 실금이 갈 수 있고, 충격 방지 연골이 한순간에 찢어져 버릴 수 있는 가장 치명적인 행동입니다." }
+            { score: 3, category: "일상", title: "침대에 누워 다리 들었다 내리기", angle: 0, desc: "무릎에 하중이 전혀 실리지 않고 허벅지 근육만 부드럽게 수축하므로, 병원 재활이나 회복 운동으로 강력 추천하는 초안전 동작입니다." },
+            { score: 4, category: "운동", title: "수영장에서 편안하게 물장구치기", angle: 10, desc: "물이 몸무게를 지탱해 주어 관절끼리 충격을 입지 않으며, 연골 마모 우려 없이 주변 허벅지 근육을 골고루 단련할 수 있습니다." },
+            { score: 5, category: "일상", title: "침대에 대자로 편안하게 누워있기", angle: 0, desc: "온몸의 뼈마디가 중력의 힘에서 풀려나고 전신 피로가 분산되므로, 지쳐있던 연골 세포들이 완전히 영양을 흡수하고 치유되는 최고의 휴식 자세입니다." },
+            { score: 7, category: "운동", title: "실내 자전거 가벼운 강도로 타기", angle: 70, desc: "체중을 안장이 거의 전부 감당해 주므로, 무릎뼈 연골이 압박받는 부담을 아주 미미하게 줄이면서 관절 주위를 가동시켜 줍니다." },
+            { score: 10, category: "일상", title: "의자나 소파에 바르게 앉아 있기", angle: 90, desc: "체중의 일부를 엉덩이와 등받이가 흡수해 주며 상체 뼈대만 가볍게 아래를 향해 내려앉는 수준의 무난한 상태입니다." },
+            { score: 15, category: "일상", title: "동네 평지를 천천히 산책하듯 걷기", angle: 15, desc: "발뒤꿈치부터 지면을 사뿐히 디뎌 가므로 지면 반동이 매우 무뎌지며, 관절막 윤활유 공급을 적절히 원활하게 만드는 가벼운 활력 동작입니다." },
+            { score: 18, category: "운동", title: "수영장 물속에서 사뿐사뿐 걷기", angle: 20, desc: "물의 가벼운 부력이 몸무게의 수십 퍼센트를 덜어 주므로 다리가 받는 스트레스가 미미하며, 허벅지 앞뒤 탄력까지 효과적으로 늘려줍니다." },
+            { score: 20, category: "일상", title: "평상시 평지 걷기 (출퇴근, 일상 보행)", angle: 20, desc: "체중의 약 2배에서 3배에 가깝게 순간 하중이 지나가지만, 양쪽 다리가 하중 시간을 균등하게 분산하므로 무리 없는 튼튼한 표준 행동입니다." },
+            { score: 23, category: "일상", title: "의자에서 짚지 않고 부드럽게 일어나기", angle: 80, desc: "다리 근육이 온몸의 추진력을 발생시키기 위해 순간적으로 오므라들면서 무릎뼈 안쪽의 맞물린 부위가 가벼운 마찰 자극을 얻습니다." },
+            { score: 25, category: "운동", title: "헬스장 일립티컬 기구 부드럽게 타기", angle: 40, desc: "발바닥 전체가 고정식 발판에 계속 닿아 있는 구조이므로, 딱딱한 지면에서 받는 낙하 리듬 충격이 원천 차단된 이상적인 유산소 행동입니다." },
+            { score: 27, category: "일상", title: "완만한 동네 내리막길 천천히 걷기", angle: 25, desc: "내 몸의 경사 미끄러짐을 방지하고자 브레이크 역할을 하는 대퇴 근육이 긴장하기 시작해, 뒤꿈치가 닿을 때 점차 압박이 축적됩니다." },
+            { score: 30, category: "운동", title: "맨몸으로 무릎을 반만 굽히는 하프 스쿼트", angle: 60, desc: "90도 이하의 부드러운 하프 가동 범위는 무릎 앞쪽 압착력이 적절하여, 관절막 두께를 단단하게 유지해 주는 아주 건강한 하체 운동입니다." },
+            { score: 33, category: "일상", title: "계단 한 칸씩 가볍게 걸어 올라가기", angle: 50, desc: "상체 질량 전부를 위로 들어올려야 해서, 허벅지 근육의 거대 수축력이 발생하며 대퇴부 관절면 안쪽으로 고압의 긴장이 쏠립니다." },
+            { score: 35, category: "운동", title: "팔을 힘차게 흔들며 빠르게 걷기", angle: 22, desc: "일반 보행에 비해 내딛는 발동작의 속도 탄력이 가속되어 바닥 지면으로부터 무릎 안쪽 뼈로 반동 충격파가 소폭 유입됩니다." },
+            { score: 40, category: "일상", title: "아파트나 지하철 계단 걸어 내려가기", angle: 60, desc: "디디는 매 순간마다 중력 낙하 충격이 가중되어 체중의 5배 수준 하중이 무릎에 한 번에 집중되므로, 계단은 오르기보다 내려갈 때 더 크게 상합니다." },
+            { score: 43, category: "운동", title: "흙길이나 트랙에서 가볍게 조깅하기", angle: 35, desc: "달릴 때는 두 발이 완벽하게 공중에 부양했다 한쪽 발씩 낙하를 반복하므로 걷기보다 수배 이상의 강한 착지 지동이 연골막에 도달합니다." },
+            { score: 45, category: "운동", title: "다리 넓게 벌려 주저앉기 (맨몸 런지)", angle: 90, desc: "온전한 중량 균형이 거의 하나의 굽혀진 다리에 지탱되므로, 앞무릎이 가도하게 발가락을 벗어나 튀어나올 때 관절 주변이 고도로 긴장합니다." },
+            { score: 50, category: "운동", title: "자전거 서서 페달 밟기 (오르막 스탠딩)", angle: 80, desc: "허벅지 뼈가 접혀 비틀어지는 상태에서 오직 발바닥 끝단과 허벅지 관절 하나에만 모든 체중 압박이 온전히 가해지는 높은 강도 구간입니다." },
+            { score: 55, category: "일상", title: "쪼그려 앉아서 집안일 하기 (빨래, 청소)", angle: 140, desc: "무릎이 완전 한계치까지 오므라들어 덮개뼈와 주변 부하가 극단적으로 밀착되며, 맷돌을 올려놓고 비비는 것처럼 연골판 뒤를 세게 파괴합니다." },
+            { score: 60, category: "일상", title: "방바닥에 양반다리로 비틀어 앉기", angle: 120, desc: "무릎을 비정상적인 회전 각도로 비틀어 꺾이게 만듭니다. 한국 좌식 생활 특유의 자세로 연골 내측 집중 편마모를 만드는 주범입니다." },
+            { score: 63, category: "운동", title: "시멘트나 아스팔트 바닥 본격 달리기", angle: 40, desc: "완충력이 전혀 없는 딱딱한 시멘트면을 내리찧으며 달리므로 미세 뼈 및 연골 외부에 지속적인 진동 충격(Hammering)이 고스란히 쌓입니다." },
+            { score: 68, category: "운동", title: "무거운 배낭 메고 등산길 내려오기", angle: 65, desc: "본인의 몸무게에 등에 얹은 고중량 짐 무게까지 중력 방향 하향 가속이 붙어 연골 내부를 마구 으스러뜨리는 최악의 등산 피로 요인입니다." },
+            { score: 70, category: "운동", title: "바벨 짊어지고 주저앉기 (중량 스쿼트)", angle: 90, desc: "관절이 깊게 구부러진 고압 구간에서 임의로 인공적인 중량까지 얹어 수직으로 억압하므로 연골 세포의 충돌과 무리가 초비상 수준에 달합니다." },
+            { score: 73, category: "운동", title: "배드민턴/테니스 중 방향 틀어 급정거", angle: 75, desc: "민첩하게 달리다 외측 신발날로 지면을 깎듯 제동 시, 관절 구부러짐과 좌우 비틀림 마찰이 극단적으로 중복 충돌하여 관절이 무너지기 쉽습니다." },
+            { score: 77, category: "운동", title: "빠르고 잦은 스텝 에어로빅/댄스 춤추기", angle: 80, desc: "쉴 새 없이 도약하고 관절이 기우뚱 기울어지며 발바닥 착지가 이루어져, 하체 인대 결합 조직 및 연골 표면에 연속 충격을 퍼붓습니다." },
+            { score: 80, category: "운동", title: "축구/족구 경기 도중 급선회 및 공 차기", angle: 85, desc: "스파이크 등으로 발바닥이 고정된 상태에서 골반과 상체만 돌려 비틀 때, 접혀있던 무릎뼈 안쪽 조직들이 서로 심각하게 찢어질 만큼 회전 타격을 입습니다." },
+            { score: 85, category: "운동", title: "농구 점프 착지 시 단단하게 땅 디디기", angle: 90, desc: "매우 높은 높이에서 낙하할 때 다리가 스프링 역할을 하려 급히 조여 들므로, 순간 수직 에너지가 척추와 무릎 완충 조직에 엄청난 고통을 줍니다." },
+            { score: 90, category: "운동", title: "시멘트 바닥에서 연속 줄넘기 뛰기", angle: 30, desc: "가볍고 낮게 뛰어서 괜찮을 듯하지만, 단단하고 거친 돌바닥 위를 연속 수백 수천 차례 미세 충격으로 망치질하듯 난타해 연골판 미세 파열을 냅니다." },
+            { score: 95, category: "운동", title: "깊숙이 주저앉는 스쿼트 (풀 스쿼트)", angle: 130, desc: "연골 부착 면이 한계를 넘어 관절 홈 안으로 완전히 끼여 들어간 최악의 조임 각도에서 힘을 쓰기 때문에 미세 파열과 조기 관절 노화를 부릅니다." },
+            { score: 100, category: "운동", title: "높은 단상 위에서 맨바닥으로 뛰어내리기", angle: 100, desc: "낙하 제어 장치 없이 바닥 충격이 관절과 뼈끼리 직접 마주치게 만들어, 단 한 번의 착지만으로도 연골이 파열될 수 있는 대단히 가혹하고 위험한 상황입니다." }
         ];
 
         let gameStreak = 0;
@@ -506,24 +525,109 @@
         let currentLeftIndex = -1;
         let currentRightIndex = -1;
 
-        // 로컬스토리지에서 최고 기록 불러오기
-        if (localStorage.getItem("knee_high_score_v3")) {
-            gameHighScore = parseInt(localStorage.getItem("knee_high_score_v3"), 10);
+        // 로컬스토리지 최고 기록 불러오기
+        if (localStorage.getItem("knee_high_score_v4")) {
+            gameHighScore = parseInt(localStorage.getItem("knee_high_score_v4"), 10);
             document.getElementById("game-high-score").textContent = gameHighScore;
+        }
+
+        // 동작 이름 기반으로 직관적인 일러스트 SVG를 생성하는 헬퍼 함수
+        function getMotionSvg(title) {
+            let color = "#0d9488"; // 테마 기본 색상 (Teal)
+
+            if (title.includes("누워")) {
+                // 누워있는 사람 구조
+                return `<svg class="w-10 h-10 md:w-16 md:h-16" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="44" width="56" height="6" rx="3" fill="#cbd5e1" />
+                    <circle cx="16" cy="30" r="5" fill="${color}" />
+                    <path d="M 22 35 L 38 35 L 44 20 L 52 24" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M 22 35 L 34 35" stroke="${color}" stroke-width="4" stroke-linecap="round" />
+                </svg>`;
+            } else if (title.includes("물속") || title.includes("수영")) {
+                // 물결과 수영 형태
+                return `<svg class="w-10 h-10 md:w-16 md:h-16" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 10 40 Q 20 35 30 40 T 50 40 T 70 40" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" />
+                    <path d="M 6 48 Q 18 43 30 48 T 54 48 T 78 48" stroke="#0284c7" stroke-width="3" stroke-linecap="round" />
+                    <circle cx="32" cy="18" r="5" fill="${color}" />
+                    <path d="M 22 26 L 32 24 L 46 30" stroke="${color}" stroke-width="4" stroke-linecap="round" />
+                    <path d="M 30 24 L 24 38" stroke="${color}" stroke-width="4" stroke-linecap="round" />
+                </svg>`;
+            } else if (title.includes("자전거")) {
+                // 자전거 형상
+                return `<svg class="w-10 h-10 md:w-16 md:h-16" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="18" cy="42" r="8" stroke="${color}" stroke-width="3" />
+                    <circle cx="46" cy="42" r="8" stroke="${color}" stroke-width="3" />
+                    <path d="M 18 42 L 32 42 L 38 30 L 26 30 Z" stroke="${color}" stroke-width="3" stroke-linejoin="round" />
+                    <path d="M 32 42 L 36 22 L 44 22" stroke="${color}" stroke-width="3" stroke-linecap="round" />
+                    <path d="M 38 30 L 46 42" stroke="${color}" stroke-width="3" />
+                </svg>`;
+            } else if (title.includes("의자") || title.includes("소파") || title.includes("앉아")) {
+                // 의자 및 앉아있는 사람
+                return `<svg class="w-10 h-10 md:w-16 md:h-16" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 20 28 L 20 48 M 20 38 L 36 38 L 36 52" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" />
+                    <circle cx="28" cy="16" r="5" fill="${color}" />
+                    <path d="M 28 21 L 28 34 L 40 34 L 40 46" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>`;
+            } else if (title.includes("계단") || title.includes("내리막길")) {
+                // 계단 형상
+                return `<svg class="w-10 h-10 md:w-16 md:h-16" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 10 50 L 24 50 L 24 38 L 38 38 L 38 26 L 52 26" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                    <circle cx="44" cy="14" r="4" fill="${color}" />
+                    <path d="M 40 18 L 34 24 L 28 32" stroke="${color}" stroke-width="3.5" stroke-linecap="round" />
+                    <path d="M 34 24 L 44 26" stroke="${color}" stroke-width="3.5" stroke-linecap="round" />
+                </svg>`;
+            } else if (title.includes("스쿼트") || title.includes("런지") || title.includes("쪼그려")) {
+                // 하체 굽힌 관절 형태
+                return `<svg class="w-10 h-10 md:w-16 md:h-16" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="32" cy="14" r="5" fill="${color}" />
+                    <path d="M 32 19 L 32 30 L 18 35 L 24 50" stroke="${color}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M 32 30 L 46 35 L 40 50" stroke="${color}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>`;
+            } else if (title.includes("산") || title.includes("등산") || title.includes("배낭") || title.includes("하산")) {
+                // 등산/산 실루엣
+                return `<svg class="w-10 h-10 md:w-16 md:h-16" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 8 50 L 28 18 L 40 34 L 54 14 L 60 50 Z" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2" stroke-linejoin="round" />
+                    <circle cx="34" cy="22" r="4" fill="${color}" />
+                    <path d="M 34 26 L 30 38 L 36 46" stroke="${color}" stroke-width="3.5" stroke-linecap="round" />
+                    <rect x="22" y="24" width="6" height="10" rx="1" fill="#f59e0b" />
+                </svg>`;
+            } else if (title.includes("달리기") || title.includes("조깅") || title.includes("러닝") || title.includes("뛰기") || title.includes("줄넘기")) {
+                // 역동적 달리기 실루엣
+                return `<svg class="w-10 h-10 md:w-16 md:h-16" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="36" cy="12" r="5" fill="${color}" />
+                    <path d="M 28 24 L 38 20 L 44 28 L 52 26" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M 32 18 L 24 30 L 32 38 L 20 46" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>`;
+            } else if (title.includes("배드민턴") || title.includes("테니스") || title.includes("축구") || title.includes("농구") || title.includes("급정거") || title.includes("착지")) {
+                // 관절 충격 불꽃 표기
+                return `<svg class="w-10 h-10 md:w-16 md:h-16" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="32" cy="14" r="5" fill="#f43f5e" />
+                    <path d="M 32 19 L 28 32 L 40 34 L 34 48" stroke="#f43f5e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <!-- 충격파 이펙트 -->
+                    <path d="M 12 36 L 20 34 M 14 44 L 22 38 M 48 34 L 40 36" stroke="#fb7185" stroke-width="3" stroke-linecap="round" />
+                </svg>`;
+            }
+
+            // 기본 걷기 동작 아이콘
+            return `<svg class="w-10 h-10 md:w-16 md:h-16" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="14" r="5" fill="${color}" />
+                <path d="M 32 19 L 28 32 L 36 46" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M 32 19 L 36 30 L 26 44" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>`;
         }
 
         // 탭 전환 기능
         function switchTab(tabId) {
             playSound('click');
             document.querySelectorAll('.nav-tab').forEach(btn => {
-                btn.className = "nav-tab flex-1 md:flex-initial px-6 py-3 rounded-xl text-lg font-extrabold transition-all duration-300 text-slate-600 hover:text-slate-900 hover:bg-white/50";
+                btn.className = "nav-tab flex-1 md:flex-initial px-4 md:px-6 py-2.5 md:py-3 rounded-xl text-sm md:text-lg font-extrabold transition-all duration-300 text-slate-600 hover:text-slate-900 hover:bg-white/50";
             });
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.className = "tab-panel hidden space-y-8 animate-fade-in";
             });
 
             const activeBtn = document.getElementById('tab-' + tabId);
-            activeBtn.className = "nav-tab flex-1 md:flex-initial px-6 py-3 rounded-xl text-lg font-extrabold transition-all duration-300 bg-teal-600 text-white shadow-md";
+            activeBtn.className = "nav-tab flex-1 md:flex-initial px-4 md:px-6 py-2.5 md:py-3 rounded-xl text-sm md:text-lg font-extrabold transition-all duration-300 bg-teal-600 text-white shadow-md";
             
             const activePanel = document.getElementById('panel-' + tabId);
             activePanel.className = "tab-panel block space-y-8 animate-fade-in";
@@ -535,7 +639,7 @@
             }
         }
 
-        // 해부학적 무릎 그래픽 생성 함수
+        // 해부학적 관절 모델 및 점선 각도기 가이드 그리기 함수 (모달 상세용)
         function drawAnatomicalKnee(svgId, angleInDegrees, stressScore) {
             const svg = document.getElementById(svgId);
             if (!svg) return;
@@ -544,63 +648,114 @@
             
             let angleRad = (angleInDegrees * Math.PI) / 180;
             
-            // 뼈대 좌표 기준점
-            const femStartX = 50;
-            const femStartY = 15;
-            const kneeJointX = 50;
-            const kneeJointY = 50;
+            // 골격 중심 관절 기준점 (50, 45)
+            const jX = 50;
+            const jY = 45;
+            const boneLength = 32;
             
-            // 장딴지 뼈 연산
-            const tibiaLen = 33;
-            const tibiaEndX = kneeJointX + tibiaLen * Math.sin(angleRad);
-            const tibiaEndY = kneeJointY + tibiaLen * Math.cos(angleRad);
-            
-            // 위험도 점수별 위험 색상 변환
-            let stressColor = "#10b981"; // 안전 (초록)
-            if (stressScore > 35) stressColor = "#f59e0b"; // 주의 (오렌지)
-            if (stressScore > 65) stressColor = "#ef4444"; // 위험 (빨강)
-            
-            // 넙다리뼈 (허벅지 대퇴골)
-            const femurPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            femurPath.setAttribute("d", `M ${femStartX} ${femStartY} L ${kneeJointX} ${kneeJointY}`);
-            femurPath.setAttribute("stroke", "#475569"); 
-            femurPath.setAttribute("stroke-width", "9");
-            femurPath.setAttribute("stroke-linecap", "round");
-            
-            // 정강이뼈 (종아리 경골)
-            const tibiaPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            tibiaPath.setAttribute("d", `M ${kneeJointX} ${kneeJointY} L ${tibiaEndX} ${tibiaEndY}`);
-            tibiaPath.setAttribute("stroke", "#64748b");
-            tibiaPath.setAttribute("stroke-width", "7.5");
-            tibiaPath.setAttribute("stroke-linecap", "round");
-            
-            // 관절 완충 연골판
-            const cartilage = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-            cartilage.setAttribute("cx", kneeJointX);
-            cartilage.setAttribute("cy", kneeJointY);
-            const cartilageRadius = 8 + (stressScore / 20);
-            cartilage.setAttribute("r", cartilageRadius);
-            cartilage.setAttribute("fill", stressColor);
-            cartilage.setAttribute("fill-opacity", "0.95");
-            cartilage.setAttribute("stroke", "#ffffff");
-            cartilage.setAttribute("stroke-width", "3");
-
-            // 충격파 시각 효과
-            if (stressScore > 50) {
-                const halo = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-                halo.setAttribute("cx", kneeJointX);
-                halo.setAttribute("cy", kneeJointY);
-                halo.setAttribute("r", cartilageRadius + 7);
-                halo.setAttribute("fill", "none");
-                halo.setAttribute("stroke", stressColor);
-                halo.setAttribute("stroke-width", "2.5");
-                halo.setAttribute("stroke-dasharray", "4,4");
-                svg.appendChild(halo);
+            // 위험 강도별 압박 테마 색상 정의
+            let color = "#10b981"; // 안전 (초록)
+            let glow = "rgba(16, 185, 129, 0.4)";
+            if (stressScore > 35) { 
+                color = "#f59e0b"; 
+                glow = "rgba(245, 158, 11, 0.4)"; 
             }
-            
-            svg.appendChild(femurPath);
-            svg.appendChild(tibiaPath);
-            svg.appendChild(cartilage);
+            if (stressScore > 65) { 
+                color = "#ef4444"; 
+                glow = "rgba(239, 68, 68, 0.4)"; 
+            }
+
+            // SVG 내부 필터 및 그라데이션 정의 주입
+            let svgContent = `
+                <defs>
+                    <radialGradient id="grad-joint-${svgId}" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="${color}" stop-opacity="0.95"/>
+                        <stop offset="100%" stop-color="${color}" stop-opacity="0.1"/>
+                    </radialGradient>
+                    <filter id="glow-${svgId}">
+                        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+            `;
+
+            // 1. 기준 수직 점선 (0도 즉, 다리를 완전히 쭉 편 상태의 연장선)
+            svgContent += `
+                <line x1="${jX}" y1="${jY}" x2="${jX}" y2="${jY + boneLength}" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,3" />
+            `;
+
+            // 2. 종아리 뼈가 꺾여 내려간 끝점 계산 (뒤방향/왼쪽으로 회전)
+            const tX = jX - boneLength * Math.sin(angleRad);
+            const tY = jY + boneLength * Math.cos(angleRad);
+
+            // 3. 각도 표시용 호선(Arc)과 각도 명칭 수치 텍스트 렌더링
+            if (angleInDegrees > 10) {
+                const arcR = 18;
+                const startX = jX;
+                const startY = jY + arcR;
+                const endX = jX - arcR * Math.sin(angleRad);
+                const endY = jY + arcR * Math.cos(angleRad);
+                
+                svgContent += `
+                    <!-- 각도계 호선 표시 -->
+                    <path d="M ${startX} ${startY} A ${arcR} ${arcR} 0 0 1 ${endX} ${endY}" fill="none" stroke="#0ea5e9" stroke-width="2.5" stroke-dasharray="2,2" />
+                    <text x="${jX - 14}" y="${jY + 28}" fill="#0284c7" font-size="8" font-weight="900" text-anchor="middle">${angleInDegrees}° 접힘</text>
+                `;
+            } else {
+                svgContent += `
+                    <text x="${jX}" y="${jY + 25}" fill="#64748b" font-size="8" font-weight="900" text-anchor="middle">0° (쭉 편 상태)</text>
+                `;
+            }
+
+            // 4. 고정되어 있는 대퇴골 (허벅지 뼈) 형상 그리기
+            svgContent += `
+                <!-- 허벅지 대퇴골 입체 렌더링 -->
+                <path d="M 46 12 C 46 7, 54 7, 54 12 L 54 40 C 56 42, 54 45, 50 45 C 46 45, 44 42, 46 40 Z" fill="#e2e8f0" stroke="#475569" stroke-width="2" />
+                <text x="${jX}" y="${jY - 18}" fill="#475569" font-size="7" font-weight="bold" text-anchor="middle">허벅지뼈</text>
+            `;
+
+            // 5. 각도에 맞춰 회전 변환(Rotation)이 적용되는 경골 (정강이 종아리 뼈) 그리기
+            svgContent += `
+                <!-- 회전하는 정강이 뼈 그룹 -->
+                <g transform="rotate(${-angleInDegrees}, ${jX}, ${jY})">
+                    <path d="M 47 45 C 45 45, 46 48, 47 50 L 47 75 C 47 80, 53 80, 53 75 L 53 50 C 54 48, 55 45, 53 45 Z" fill="#cbd5e1" stroke="#475569" stroke-width="2" />
+                    <text x="${jX}" y="${jY + 34}" fill="#475569" font-size="7" font-weight="bold" text-anchor="middle" transform="rotate(${angleInDegrees}, ${jX}, ${jY + 31})">정강이뼈</text>
+                </g>
+            `;
+
+            // 6. 무릎 앞을 덮고 압박력을 직접 연골에 가하는 슬개골 (무릎뼈) 그리기
+            let patellaOffsetY = 0;
+            if (angleInDegrees > 45) {
+                patellaOffsetY = (angleInDegrees - 45) * 0.12;
+            }
+            svgContent += `
+                <!-- 슬개골 (무릎 덮개뼈) 배치 -->
+                <ellipse cx="${jX + 7.5}" cy="${jY - 1.5 + patellaOffsetY}" rx="4.2" ry="5.8" fill="#f8fafc" stroke="#475569" stroke-width="2" />
+                <text x="${jX + 16}" y="${jY + 0.5}" fill="#475569" font-size="7" font-weight="black">무릎뼈</text>
+            `;
+
+            // 7. 뼈와 뼈 사이에 존재하는 관절 연골 쿠션 묘사
+            const cRadius = 4.8 + (stressScore * 0.06);
+            svgContent += `
+                <!-- 완충 연골판 관절강 쿠션 -->
+                <circle cx="${jX}" cy="${jY}" r="${cRadius}" fill="url(#grad-joint-${svgId})" stroke="${color}" stroke-width="2.5" filter="url(#glow-${svgId})" />
+                <!-- 연골 중심 밀착 포인트 -->
+                <circle cx="${jX}" cy="${jY}" r="2" fill="#ffffff" />
+            `;
+
+            // 8. 위험 점수가 50점을 넘을 경우 맥동 방사형 충격선 효과 추가
+            if (stressScore > 50) {
+                svgContent += `
+                    <circle cx="${jX}" cy="${jY}" r="${cRadius + 6}" fill="none" stroke="${color}" stroke-width="1.2" stroke-dasharray="2,2" opacity="0.8">
+                        <animate attributeName="r" values="${cRadius + 2};${cRadius + 9};${cRadius + 2}" dur="1.8s" repeatCount="indefinite" />
+                    </circle>
+                `;
+            }
+
+            svg.innerHTML = svgContent;
         }
 
         // 게임 시작 및 리셋
@@ -613,7 +768,7 @@
             document.getElementById("game-streak").textContent = gameStreak;
             document.getElementById("game-screen-start").className = "hidden";
             document.getElementById("game-screen-over").className = "hidden";
-            document.getElementById("game-screen-play").className = "grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10";
+            document.getElementById("game-screen-play").className = "grid grid-cols-2 gap-3 md:gap-8 relative z-10";
             
             currentLeftIndex = Math.floor(Math.random() * kneeData.length);
             do {
@@ -623,7 +778,7 @@
             setupCardsUI();
         }
 
-        // 카드 UI 구성
+        // 카드 UI 구성 (무릎 각도 골격 구조 비주얼 제거 상태 반영)
         function setupCardsUI() {
             const leftData = kneeData[currentLeftIndex];
             const rightData = kneeData[currentRightIndex];
@@ -634,16 +789,15 @@
             
             const leftCatEl = document.getElementById("left-category");
             if (leftData.category === '일상') {
-                leftCatEl.className = "absolute top-4 left-4 px-3.5 py-1.5 bg-teal-100 text-teal-800 rounded-xl text-xs md:text-sm font-black uppercase";
+                leftCatEl.className = "absolute top-2.5 left-2.5 px-2.5 py-1 bg-teal-100 text-teal-800 rounded-xl text-[9px] md:text-sm font-black uppercase";
             } else {
-                leftCatEl.className = "absolute top-4 left-4 px-3.5 py-1.5 bg-indigo-100 text-indigo-800 rounded-xl text-xs md:text-sm font-black uppercase";
+                leftCatEl.className = "absolute top-2.5 left-2.5 px-2.5 py-1 bg-indigo-100 text-indigo-800 rounded-xl text-[9px] md:text-sm font-black uppercase";
             }
             
-            document.getElementById("left-angle").textContent = leftData.angle;
-            document.getElementById("left-desc").textContent = leftData.desc;
-            document.getElementById("left-score").innerHTML = `${leftData.score}<span class="text-2xl font-normal text-slate-500 ml-1">점</span>`;
+            document.getElementById("left-score").innerHTML = `${leftData.score}<span class="text-sm md:text-2xl font-normal text-slate-500 ml-0.5">점</span>`;
             
-            drawAnatomicalKnee("left-knee-svg", leftData.angle, leftData.score);
+            // 동작 맞춤형 일러스트 SVG 주입
+            document.getElementById("left-motion-img").innerHTML = getMotionSvg(leftData.title);
             
             // 오른쪽 카드 적용
             document.getElementById("right-title").textContent = rightData.title;
@@ -651,20 +805,18 @@
             
             const rightCatEl = document.getElementById("right-category");
             if (rightData.category === '일상') {
-                rightCatEl.className = "absolute top-4 left-4 px-3.5 py-1.5 bg-teal-100 text-teal-800 rounded-xl text-xs md:text-sm font-black uppercase";
+                rightCatEl.className = "absolute top-2.5 left-2.5 px-2.5 py-1 bg-teal-100 text-teal-800 rounded-xl text-[9px] md:text-sm font-black uppercase";
             } else {
-                rightCatEl.className = "absolute top-4 left-4 px-3.5 py-1.5 bg-indigo-100 text-indigo-800 rounded-xl text-xs md:text-sm font-black uppercase";
+                rightCatEl.className = "absolute top-2.5 left-2.5 px-2.5 py-1 bg-indigo-100 text-indigo-800 rounded-xl text-[9px] md:text-sm font-black uppercase";
             }
             
-            document.getElementById("right-angle").textContent = rightData.angle;
-            document.getElementById("right-desc").textContent = rightData.desc;
+            // 동작 맞춤형 일러스트 SVG 주입
+            document.getElementById("right-motion-img").innerHTML = getMotionSvg(rightData.title);
             
-            drawAnatomicalKnee("right-knee-svg", rightData.angle, 30);
-            
-            document.getElementById("game-controls").className = "grid grid-cols-2 gap-4";
+            document.getElementById("game-controls").className = "grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4";
             document.getElementById("right-score-reveal").className = "hidden";
             
-            document.getElementById("card-right").className = "bg-slate-50 border-2 border-slate-200 rounded-3xl p-6 md:p-8 flex flex-col justify-between min-h-[420px] relative overflow-hidden transition-all duration-500 shadow-sm";
+            document.getElementById("card-right").className = "bg-slate-50 border-2 border-slate-200 rounded-2xl md:rounded-3xl p-3 md:p-8 flex flex-col justify-between min-h-[360px] md:min-h-[500px] relative overflow-hidden transition-all duration-500 shadow-sm";
         }
 
         // 사용자의 대소 비교 선택 제출
@@ -681,7 +833,7 @@
             
             document.getElementById("game-controls").className = "hidden";
             const revealEl = document.getElementById("right-score-reveal");
-            revealEl.className = "block text-center text-5xl md:text-6xl font-black text-amber-500 py-2.5 animate-pulse";
+            revealEl.className = "block text-center text-2xl md:text-6xl font-black text-amber-500 py-1 md:py-2.5 animate-pulse";
             
             // 수치 상승 모션 시뮬레이션
             let currentDisplay = 0;
@@ -692,11 +844,10 @@
                 currentDisplay += increment;
                 if (currentDisplay >= rightScore) {
                     clearInterval(counter);
-                    revealEl.innerHTML = `${rightScore}<span class="text-2xl font-normal text-slate-500 ml-1">점</span>`;
-                    drawAnatomicalKnee("right-knee-svg", kneeData[currentRightIndex].angle, rightScore);
+                    revealEl.innerHTML = `${rightScore}<span class="text-sm md:text-2xl font-normal text-slate-500 ml-0.5">점</span>`;
                     evaluateResult(isCorrect);
                 } else {
-                    revealEl.innerHTML = `${Math.round(currentDisplay)}<span class="text-2xl font-normal text-slate-400 ml-1">점</span>`;
+                    revealEl.innerHTML = `${Math.round(currentDisplay)}<span class="text-sm md:text-2xl font-normal text-slate-400 ml-0.5">점</span>`;
                 }
             }, stepTime);
         }
@@ -710,12 +861,12 @@
                 
                 if (gameStreak > gameHighScore) {
                     gameHighScore = gameStreak;
-                    localStorage.setItem("knee_high_score_v3", gameHighScore);
+                    localStorage.setItem("knee_high_score_v4", gameHighScore);
                     document.getElementById("game-high-score").textContent = gameHighScore;
                 }
                 
                 // 정답 외곽선 피드백
-                document.getElementById("card-right").className = "bg-emerald-50 border-2 border-emerald-500 rounded-3xl p-6 md:p-8 flex flex-col justify-between min-h-[420px] relative overflow-hidden transition-all duration-500 shadow-md";
+                document.getElementById("card-right").className = "bg-emerald-50/80 border-2 border-emerald-500 rounded-2xl md:rounded-3xl p-3 md:p-8 flex flex-col justify-between min-h-[360px] md:min-h-[500px] relative overflow-hidden transition-all duration-500 shadow-md";
                 
                 setTimeout(() => {
                     currentLeftIndex = currentRightIndex;
@@ -731,7 +882,7 @@
                 updateLivesUI();
                 
                 // 오답 외곽선 피드백
-                document.getElementById("card-right").className = "bg-rose-50 border-2 border-rose-400 rounded-3xl p-6 md:p-8 flex flex-col justify-between min-h-[420px] relative overflow-hidden transition-all duration-500 shadow-md";
+                document.getElementById("card-right").className = "bg-rose-50 border-2 border-rose-400 rounded-2xl md:rounded-3xl p-3 md:p-8 flex flex-col justify-between min-h-[360px] md:min-h-[500px] relative overflow-hidden transition-all duration-500 shadow-md";
                 
                 if (gameLives <= 0) {
                     setTimeout(() => {
@@ -862,7 +1013,7 @@
                 svg.appendChild(label);
             }
 
-            // 기본 검정 축 선조
+            // 기본 축 라인 생성
             const xAxis = document.createElementNS("http://www.w3.org/2000/svg", "line");
             xAxis.setAttribute("x1", margin.left);
             xAxis.setAttribute("y1", height - margin.bottom);
@@ -995,7 +1146,7 @@
             });
         }
 
-        // 구슬 클릭 시 흔들림 없이 모달 팝업으로 상세 내용 띄우기
+        // 구슬 클릭 시 모달 팝업으로 상세 내용 띄우기
         function openDetailModal(item) {
             playSound('click');
             
@@ -1030,7 +1181,7 @@
 
             document.getElementById("popup-desc").textContent = item.desc;
 
-            // 모달 내 동적 시뮬레이터 렌더링
+            // 모달 내 동적 시뮬레이터 렌더링 (구슬 분석용 모달 시각화 장치 유지)
             drawAnatomicalKnee("popup-knee-svg", item.angle, item.score);
         }
 
@@ -1066,9 +1217,12 @@
                 }
 
                 const card = document.createElement("div");
-                card.className = `border-2 rounded-3xl p-6 flex flex-col justify-between space-y-4 hover:shadow-lg transition-all duration-300 ${borderStyle} dict-item-card cursor-pointer`;
+                card.className = `border-2 rounded-3xl p-5 flex flex-col justify-between space-y-4 hover:shadow-lg transition-all duration-300 ${borderStyle} dict-item-card cursor-pointer`;
                 card.setAttribute("data-title", item.title);
                 card.setAttribute("data-category", item.category);
+
+                // 동작 그래픽 추출
+                const motionImgHtml = getMotionSvg(item.title);
 
                 card.innerHTML = `
                     <div class="space-y-3">
@@ -1079,8 +1233,13 @@
                             </div>
                             <span class="text-sm font-bold text-slate-500">각도: <strong class="text-slate-800 font-extrabold text-base">${item.angle}°</strong></span>
                         </div>
-                        <h3 class="font-extrabold text-lg md:text-xl text-slate-900 leading-snug line-clamp-2">${item.title}</h3>
-                        <p class="text-sm md:text-base text-slate-600 leading-relaxed line-clamp-3 font-medium">${item.desc}</p>
+                        <div class="flex items-center gap-4 pt-1">
+                            <div class="flex-shrink-0 bg-slate-50 p-2 rounded-2xl border border-slate-100">
+                                ${motionImgHtml}
+                            </div>
+                            <h3 class="font-extrabold text-base md:text-xl text-slate-900 leading-snug line-clamp-2 flex-grow">${item.title}</h3>
+                        </div>
+                        <p class="text-xs md:text-base text-slate-600 leading-relaxed line-clamp-3 font-medium">${item.desc}</p>
                     </div>
                     
                     <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
@@ -1089,7 +1248,7 @@
                                 <div class="h-full rounded-full ${item.score > 65 ? 'bg-rose-500' : item.score > 35 ? 'bg-amber-400' : 'bg-emerald-400'}" style="width: ${item.score}%"></div>
                             </div>
                         </div>
-                        <span class="text-2xl font-black ${textStyle} whitespace-nowrap">${item.score}<span class="text-xs font-bold text-slate-400 ml-0.5">점</span></span>
+                        <span class="text-xl md:text-2xl font-black ${textStyle} whitespace-nowrap">${item.score}<span class="text-xs font-bold text-slate-400 ml-0.5">점</span></span>
                     </div>
                 `;
                 
