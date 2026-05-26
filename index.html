@@ -225,25 +225,46 @@
                     </div>
                 </div>
 
-                <!-- 정답/오답 직관적 대형 O/X 오버레이 팝업 (사용자 요구 반영: 극도로 심플하고 명확한 더 위험 표기) -->
+                <!-- 정답/오답 직관적 대형 O/X 오버레이 팝업 (비교 행동 분석 및 더 위험한 행동 붉은색 박스 단독 표기) -->
                 <div id="game-feedback-overlay" class="hidden absolute inset-0 bg-white/95 backdrop-blur-[3px] z-30 flex items-center justify-center p-4">
-                    <div id="feedback-badge" class="scale-0 transition-transform duration-300 flex flex-col items-center text-center p-6 md:p-8 rounded-3xl shadow-2xl border-4 max-w-sm w-full animate-fade-in bg-white">
+                    <div id="feedback-badge" class="scale-0 transition-transform duration-300 flex flex-col items-center text-center p-5 md:p-6 rounded-3xl shadow-2xl border-4 max-w-sm w-full animate-fade-in bg-white max-h-[92vh] overflow-y-auto animate-fade-in">
                         
                         <!-- 1. 정답 여부 표기 -->
-                        <div id="feedback-icon" class="text-5xl md:text-7xl"></div>
-                        <div id="feedback-title" class="text-xl md:text-2xl font-black tracking-tight mt-2 mb-4"></div>
+                        <div id="feedback-icon" class="text-5xl md:text-6xl"></div>
+                        <div id="feedback-title" class="text-xl md:text-2xl font-black tracking-tight mt-1 mb-3"></div>
                         
-                        <!-- 2. 더 위험한 동작만 명확하게 강조 표시 -->
-                        <div class="w-full bg-rose-50 border border-rose-200 p-4 rounded-2xl mb-6 text-center shadow-inner">
-                            <span class="px-3 py-1 bg-rose-100 text-rose-700 text-xs font-extrabold rounded-lg border border-rose-300 inline-block mb-2.5">
-                                <i class="fa-solid fa-triangle-exclamation mr-1"></i> 더 위험한 행동
-                            </span>
-                            <div id="feedback-dangerous-title" class="text-sm md:text-base font-black text-slate-800 leading-snug mb-1">동작명</div>
-                            <div id="feedback-dangerous-score" class="text-lg md:text-2xl font-black text-rose-600">00점</div>
+                        <!-- 2. 비교 행동 점수 표시 영역 -->
+                        <div class="w-full space-y-2 mb-4 text-left">
+                            <span class="text-xs font-black text-slate-400 block text-center mb-1"><i class="fa-solid fa-right-left mr-1"></i> 두 행동의 무릎 부담 점수 비교</span>
+                            
+                            <!-- 상대적으로 안전한 행동 -->
+                            <div class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-center shadow-sm">
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[10px] font-extrabold rounded border border-emerald-200 inline-block mb-1">
+                                    <i class="fa-solid fa-shield-halved mr-1"></i> 상대적으로 안전한 행동
+                                </span>
+                                <div id="feedback-safer-title" class="text-xs md:text-sm font-black text-slate-700 leading-snug mb-0.5">안전한 동작명</div>
+                                <div id="feedback-safer-score" class="text-sm md:text-base font-black text-emerald-600">00점</div>
+                            </div>
+                            
+                            <!-- 구분 장식선 -->
+                            <div class="text-slate-300 text-[10px] font-black text-center flex items-center justify-center gap-2 py-0.5">
+                                <span class="h-[1px] bg-slate-200 flex-grow"></span>
+                                <span>VS</span>
+                                <span class="h-[1px] bg-slate-200 flex-grow"></span>
+                            </div>
+
+                            <!-- 더 위험한 행동 (붉은 박스 형태 유지) -->
+                            <div class="w-full bg-rose-50 border border-rose-200 p-3.5 rounded-xl text-center shadow-inner animate-pulse">
+                                <span class="px-2 py-0.5 bg-rose-100 text-rose-700 text-[10px] font-extrabold rounded border border-rose-300 inline-block mb-1.5">
+                                    <i class="fa-solid fa-triangle-exclamation mr-1"></i> 더 위험한 행동
+                                </span>
+                                <div id="feedback-dangerous-title" class="text-xs md:text-sm font-black text-slate-800 leading-snug mb-1">위험한 동작명</div>
+                                <div id="feedback-dangerous-score" class="text-base md:text-xl font-black text-rose-600">00점</div>
+                            </div>
                         </div>
 
                         <!-- 3. 다음 문제 수동 풀기 제어 버튼 -->
-                        <button id="feedback-next-btn" class="w-full py-3 md:py-3.5 bg-slate-800 hover:bg-slate-900 text-white font-extrabold rounded-2xl text-sm md:text-base transition-colors shadow-md flex items-center justify-center gap-1.5 active:scale-95 duration-150">
+                        <button id="feedback-next-btn" class="w-full py-2.5 md:py-3 bg-slate-800 hover:bg-slate-900 text-white font-extrabold rounded-xl text-sm md:text-base transition-colors shadow-md flex items-center justify-center gap-1.5 active:scale-95 duration-150">
                             다음 문제 풀기 <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
@@ -530,7 +551,7 @@
             { score: 45, category: "운동", title: "한쪽 다리를 앞으로 넓게 벌려 주저앉았다 일어나기 (런지)", angle: 90, desc: "온전한 중량 균형이 거의 하나의 굽혀진 다리에 지탱되므로, 앞무릎이 가도하게 발가락을 벗어나 튀어나올 때 관절 주변이 고도로 긴장합니다." },
             { score: 50, category: "운동", title: "자전거 탈 때 엉덩이 떼고 서서 힘차게 페달 밟기", angle: 80, desc: "허벅지 뼈가 접혀 비틀어지는 상태에서 오직 발바닥 끝단과 허벅지 관절 하나에만 모든 체중 압박이 온전히 가해지는 높은 강도 구간입니다." },
             { score: 55, category: "일상", title: "바닥에 엉덩이 안 대고 쪼그려 앉아 일하기 (빨래, 청소 등)", angle: 140, desc: "무릎이 완전 한계치까지 오므라들어 덮개뼈와 주변 부하가 극단적으로 밀착되며, 맷돌을 올려놓고 비비는 것처럼 연골판 뒤를 세게 파괴합니다." },
-            { score: 60, category: "일상", title: "방바닥에 양반다리나 좌식으로 꺾어 앉기", angle: 120, desc: "무릎을 비정상적인 회전 각도로 비틀어 꺾이게 만듭니다. 한국 좌식 생활 특유의 자세로 연골 내측 집중 편마모를 만드는 주범입니다." },
+            { score: 60, category: "일상", title: "방바닥에 양반다리나 좌식으로 꺾어 앉기", angle: 120, desc: "무릎위를 비정상적인 회전 각도로 비틀어 꺾이게 만듭니다. 한국 좌식 생활 특유의 자세로 연골 내측 집중 편마모를 만드는 주범입니다." },
             { score: 63, category: "운동", title: "아스팔트나 딱딱한 보도블록 위를 본격적으로 달리기", angle: 40, desc: "완충력이 전혀 없는 딱딱한 시멘트면을 내리찧으며 달리므로 미세 뼈 및 연골 외부에 지속적인 진동 충격(Hammering)이 고스란히 쌓입니다." },
             { score: 68, category: "운동", title: "무거운 배낭 메고 산에서 하산하기 (등산 내리막)", angle: 65, desc: "본인의 몸무게에 등에 얹은 고중량 짐 무게까지 중력 방향 하향 가속이 붙어 연골 내부를 마구 으스러뜨리는 최악의 등산 피로 요인입니다." },
             { score: 70, category: "운동", title: "어깨에 무거운 바벨 얹고 앉았다 일어나기", angle: 90, desc: "관절이 깊게 구부러진 고압 구간에서 임의로 인공적인 중량까지 얹어 수직으로 억압하므로 연골 세포의 충돌과 무리가 초비상 수준에 달합니다." },
@@ -798,7 +819,7 @@
             const overlay = document.getElementById("game-feedback-overlay");
             overlay.classList.add("hidden");
             const badge = document.getElementById("feedback-badge");
-            badge.className = "scale-0 transition-transform duration-300 flex flex-col items-center text-center p-6 md:p-8 rounded-3xl shadow-2xl border-4 max-w-sm w-full animate-fade-in bg-white";
+            badge.className = "scale-0 transition-transform duration-300 flex flex-col items-center text-center p-5 md:p-6 rounded-3xl shadow-2xl border-4 max-w-sm w-full animate-fade-in bg-white max-h-[92vh] overflow-y-auto";
 
             currentLeftIndex = Math.floor(Math.random() * kneeData.length);
             do {
@@ -891,15 +912,29 @@
             const badge = document.getElementById("feedback-badge");
             const icon = document.getElementById("feedback-icon");
             const title = document.getElementById("feedback-title");
+            
             const dangerousTitle = document.getElementById("feedback-dangerous-title");
             const dangerousScore = document.getElementById("feedback-dangerous-score");
+            const saferTitle = document.getElementById("feedback-safer-title");
+            const saferScore = document.getElementById("feedback-safer-score");
+            
             const nextBtn = document.getElementById("feedback-next-btn");
             
-            // 더 위험한 동작 (점수가 높은 동작) 연산
-            const moreDangerous = leftData.score > rightData.score ? leftData : rightData;
+            // 더 위험한 동작 및 상대적으로 안전한 동작 분류 연산
+            let moreDangerous, safer;
+            if (leftData.score > rightData.score) {
+                moreDangerous = leftData;
+                safer = rightData;
+            } else {
+                moreDangerous = rightData;
+                safer = leftData;
+            }
             
+            // 텍스트 매핑
             dangerousTitle.textContent = moreDangerous.title;
             dangerousScore.textContent = `${moreDangerous.score}점`;
+            saferTitle.textContent = safer.title;
+            saferScore.textContent = `${safer.score}점`;
 
             overlay.classList.remove("hidden");
             setTimeout(() => {
@@ -918,10 +953,10 @@
                     document.getElementById("game-high-score").textContent = gameHighScore;
                 }
                 
-                badge.className = "transform transition-transform duration-300 flex flex-col items-center text-center p-6 md:p-8 rounded-3xl shadow-2xl border-4 border-emerald-500 bg-white max-w-sm w-full animate-fade-in";
-                icon.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500 text-6xl md:text-7xl animate-bounce"></i>`;
+                badge.className = "transform transition-transform duration-300 flex flex-col items-center text-center p-5 md:p-6 rounded-3xl shadow-2xl border-4 border-emerald-500 bg-white max-w-sm w-full animate-fade-in max-h-[92vh] overflow-y-auto";
+                icon.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500 text-5xl md:text-6xl animate-bounce"></i>`;
                 title.textContent = "정답입니다! 🎉";
-                title.className = "text-xl md:text-2xl font-black text-emerald-600 mt-2 mb-4";
+                title.className = "text-xl md:text-2xl font-black text-emerald-600 mt-1 mb-3";
 
                 document.getElementById("card-right").className = "bg-emerald-50/80 border-2 border-emerald-500 rounded-2xl md:rounded-3xl p-3 md:p-8 flex flex-col justify-between min-h-[360px] md:min-h-[500px] relative overflow-hidden transition-all duration-500 shadow-md";
             } else {
@@ -929,12 +964,12 @@
                 gameLives--;
                 updateLivesUI();
                 
-                badge.className = "transform transition-transform duration-300 flex flex-col items-center text-center p-6 md:p-8 rounded-3xl shadow-2xl border-4 border-rose-500 bg-white max-w-sm w-full animate-fade-in";
-                icon.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-500 text-6xl md:text-7xl animate-bounce"></i>`;
+                badge.className = "transform transition-transform duration-300 flex flex-col items-center text-center p-5 md:p-6 rounded-3xl shadow-2xl border-4 border-rose-500 bg-white max-w-sm w-full animate-fade-in max-h-[92vh] overflow-y-auto";
+                icon.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-500 text-5xl md:text-6xl animate-bounce"></i>`;
                 title.textContent = "틀렸습니다! 😢";
-                title.className = "text-xl md:text-2xl font-black text-rose-600 mt-2 mb-4";
+                title.className = "text-xl md:text-2xl font-black text-rose-600 mt-1 mb-3";
 
-                document.getElementById("card-right").className = "bg-rose-50 border-2 border-rose-400 rounded-2xl md:rounded-3xl p-3 md:p-8 flex flex-col justify-between min-h-[360px] md:min-h-[500px] relative overflow-hidden transition-all duration-500 shadow-md";
+                document.getElementById("card-right").className = "bg-rose-50 border-2 border-rose-400 rounded-2xl md:rounded-3xl p-3 md:p-8 flex flex-col justify-between min-h-[360px] md:min-h-[500px] relative overflow-hidden transition-all duration-500 shadow-sm";
             }
 
             // [수동 조작화] 타이머에 의존하지 않고 사용자가 직접 다음 버튼을 누를 때 진행하도록 변경
