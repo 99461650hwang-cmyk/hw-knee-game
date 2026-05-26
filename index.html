@@ -220,8 +220,32 @@
                     </div>
 
                     <!-- 중간 장식 엠블럼 -->
-                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 md:w-16 md:h-16 bg-white border-2 md:border-4 border-slate-200 rounded-full flex items-center justify-center font-black text-xs md:text-lg text-slate-500 z-20 shadow-md">
+                    <div id="vs-emblem" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 md:w-16 md:h-16 bg-white border-2 md:border-4 border-slate-200 rounded-full flex items-center justify-center font-black text-xs md:text-lg text-slate-500 z-20 shadow-md">
                         VS
+                    </div>
+                </div>
+
+                <!-- 정답/오답 직관적 대형 O/X 오버레이 팝업 (사용자 요구 반영: 극도로 심플하고 명확한 더 위험 표기) -->
+                <div id="game-feedback-overlay" class="hidden absolute inset-0 bg-white/95 backdrop-blur-[3px] z-30 flex items-center justify-center p-4">
+                    <div id="feedback-badge" class="scale-0 transition-transform duration-300 flex flex-col items-center text-center p-6 md:p-8 rounded-3xl shadow-2xl border-4 max-w-sm w-full animate-fade-in bg-white">
+                        
+                        <!-- 1. 정답 여부 표기 -->
+                        <div id="feedback-icon" class="text-5xl md:text-7xl"></div>
+                        <div id="feedback-title" class="text-xl md:text-2xl font-black tracking-tight mt-2 mb-4"></div>
+                        
+                        <!-- 2. 더 위험한 동작만 명확하게 강조 표시 -->
+                        <div class="w-full bg-rose-50 border border-rose-200 p-4 rounded-2xl mb-6 text-center shadow-inner">
+                            <span class="px-3 py-1 bg-rose-100 text-rose-700 text-xs font-extrabold rounded-lg border border-rose-300 inline-block mb-2.5">
+                                <i class="fa-solid fa-triangle-exclamation mr-1"></i> 더 위험한 행동
+                            </span>
+                            <div id="feedback-dangerous-title" class="text-sm md:text-base font-black text-slate-800 leading-snug mb-1">동작명</div>
+                            <div id="feedback-dangerous-score" class="text-lg md:text-2xl font-black text-rose-600">00점</div>
+                        </div>
+
+                        <!-- 3. 다음 문제 수동 풀기 제어 버튼 -->
+                        <button id="feedback-next-btn" class="w-full py-3 md:py-3.5 bg-slate-800 hover:bg-slate-900 text-white font-extrabold rounded-2xl text-sm md:text-base transition-colors shadow-md flex items-center justify-center gap-1.5 active:scale-95 duration-150">
+                            다음 문제 풀기 <i class="fa-solid fa-arrow-right"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -487,36 +511,36 @@
     <script>
         // 무릎 연골의 관절 꺾임 및 부담을 표현한 직관적인 한글 데이터셋 (30가지 행동)
         const kneeData = [
-            { score: 3, category: "일상", title: "침대에 누워 다리 들었다 내리기", angle: 0, desc: "무릎에 하중이 전혀 실리지 않고 허벅지 근육만 부드럽게 수축하므로, 병원 재활이나 회복 운동으로 강력 추천하는 초안전 동작입니다." },
-            { score: 4, category: "운동", title: "수영장에서 편안하게 물장구치기", angle: 10, desc: "물이 몸무게를 지탱해 주어 관절끼리 충격을 입지 않으며, 연골 마모 우려 없이 주변 허벅지 근육을 골고루 단련할 수 있습니다." },
-            { score: 5, category: "일상", title: "침대에 대자로 편안하게 누워있기", angle: 0, desc: "온몸의 뼈마디가 중력의 힘에서 풀려나고 전신 피로가 분산되므로, 지쳐있던 연골 세포들이 완전히 영양을 흡수하고 치유되는 최고의 휴식 자세입니다." },
-            { score: 7, category: "운동", title: "실내 자전거 가벼운 강도로 타기", angle: 70, desc: "체중을 안장이 거의 전부 감당해 주므로, 무릎뼈 연골이 압박받는 부담을 아주 미미하게 줄이면서 관절 주위를 가동시켜 줍니다." },
-            { score: 10, category: "일상", title: "의자나 소파에 바르게 앉아 있기", angle: 90, desc: "체중의 일부를 엉덩이와 등받이가 흡수해 주며 상체 뼈대만 가볍게 아래를 향해 내려앉는 수준의 무난한 상태입니다." },
-            { score: 15, category: "일상", title: "동네 평지를 천천히 산책하듯 걷기", angle: 15, desc: "발뒤꿈치부터 지면을 사뿐히 디뎌 가므로 지면 반동이 매우 무뎌지며, 관절막 윤활유 공급을 적절히 원활하게 만드는 가벼운 활력 동작입니다." },
-            { score: 18, category: "운동", title: "수영장 물속에서 사뿐사뿐 걷기", angle: 20, desc: "물의 가벼운 부력이 몸무게의 수십 퍼센트를 덜어 주므로 다리가 받는 스트레스가 미미하며, 허벅지 앞뒤 탄력까지 효과적으로 늘려줍니다." },
-            { score: 20, category: "일상", title: "평상시 평지 걷기 (출퇴근, 일상 보행)", angle: 20, desc: "체중의 약 2배에서 3배에 가깝게 순간 하중이 지나가지만, 양쪽 다리가 하중 시간을 균등하게 분산하므로 무리 없는 튼튼한 표준 행동입니다." },
-            { score: 23, category: "일상", title: "의자에서 짚지 않고 부드럽게 일어나기", angle: 80, desc: "다리 근육이 온몸의 추진력을 발생시키기 위해 순간적으로 오므라들면서 무릎뼈 안쪽의 맞물린 부위가 가벼운 마찰 자극을 얻습니다." },
-            { score: 25, category: "운동", title: "헬스장 일립티컬 기구 부드럽게 타기", angle: 40, desc: "발바닥 전체가 고정식 발판에 계속 닿아 있는 구조이므로, 딱딱한 지면에서 받는 낙하 리듬 충격이 원천 차단된 이상적인 유산소 행동입니다." },
-            { score: 27, category: "일상", title: "완만한 동네 내리막길 천천히 걷기", angle: 25, desc: "내 몸의 경사 미끄러짐을 방지하고자 브레이크 역할을 하는 대퇴 근육이 긴장하기 시작해, 뒤꿈치가 닿을 때 점차 압박이 축적됩니다." },
-            { score: 30, category: "운동", title: "맨몸으로 무릎을 반만 굽히는 하프 스쿼트", angle: 60, desc: "90도 이하의 부드러운 하프 가동 범위는 무릎 앞쪽 압착력이 적절하여, 관절막 두께를 단단하게 유지해 주는 아주 건강한 하체 운동입니다." },
-            { score: 33, category: "일상", title: "계단 한 칸씩 가볍게 걸어 올라가기", angle: 50, desc: "상체 질량 전부를 위로 들어올려야 해서, 허벅지 근육의 거대 수축력이 발생하며 대퇴부 관절면 안쪽으로 고압의 긴장이 쏠립니다." },
-            { score: 35, category: "운동", title: "팔을 힘차게 흔들며 빠르게 걷기", angle: 22, desc: "일반 보행에 비해 내딛는 발동작의 속도 탄력이 가속되어 바닥 지면으로부터 무릎 안쪽 뼈로 반동 충격파가 소폭 유입됩니다." },
-            { score: 40, category: "일상", title: "아파트나 지하철 계단 걸어 내려가기", angle: 60, desc: "디디는 매 순간마다 중력 낙하 충격이 가중되어 체중의 5배 수준 하중이 무릎에 한 번에 집중되므로, 계단은 오르기보다 내려갈 때 더 크게 상합니다." },
-            { score: 43, category: "운동", title: "흙길이나 트랙에서 가볍게 조깅하기", angle: 35, desc: "달릴 때는 두 발이 완벽하게 공중에 부양했다 한쪽 발씩 낙하를 반복하므로 걷기보다 수배 이상의 강한 착지 지동이 연골막에 도달합니다." },
-            { score: 45, category: "운동", title: "다리 넓게 벌려 주저앉기 (맨몸 런지)", angle: 90, desc: "온전한 중량 균형이 거의 하나의 굽혀진 다리에 지탱되므로, 앞무릎이 가도하게 발가락을 벗어나 튀어나올 때 관절 주변이 고도로 긴장합니다." },
-            { score: 50, category: "운동", title: "자전거 서서 페달 밟기 (오르막 스탠딩)", angle: 80, desc: "허벅지 뼈가 접혀 비틀어지는 상태에서 오직 발바닥 끝단과 허벅지 관절 하나에만 모든 체중 압박이 온전히 가해지는 높은 강도 구간입니다." },
-            { score: 55, category: "일상", title: "쪼그려 앉아서 집안일 하기 (빨래, 청소)", angle: 140, desc: "무릎이 완전 한계치까지 오므라들어 덮개뼈와 주변 부하가 극단적으로 밀착되며, 맷돌을 올려놓고 비비는 것처럼 연골판 뒤를 세게 파괴합니다." },
-            { score: 60, category: "일상", title: "방바닥에 양반다리로 비틀어 앉기", angle: 120, desc: "무릎을 비정상적인 회전 각도로 비틀어 꺾이게 만듭니다. 한국 좌식 생활 특유의 자세로 연골 내측 집중 편마모를 만드는 주범입니다." },
-            { score: 63, category: "운동", title: "시멘트나 아스팔트 바닥 본격 달리기", angle: 40, desc: "완충력이 전혀 없는 딱딱한 시멘트면을 내리찧으며 달리므로 미세 뼈 및 연골 외부에 지속적인 진동 충격(Hammering)이 고스란히 쌓입니다." },
-            { score: 68, category: "운동", title: "무거운 배낭 메고 등산길 내려오기", angle: 65, desc: "본인의 몸무게에 등에 얹은 고중량 짐 무게까지 중력 방향 하향 가속이 붙어 연골 내부를 마구 으스러뜨리는 최악의 등산 피로 요인입니다." },
-            { score: 70, category: "운동", title: "바벨 짊어지고 주저앉기 (중량 스쿼트)", angle: 90, desc: "관절이 깊게 구부러진 고압 구간에서 임의로 인공적인 중량까지 얹어 수직으로 억압하므로 연골 세포의 충돌과 무리가 초비상 수준에 달합니다." },
-            { score: 73, category: "운동", title: "배드민턴/테니스 중 방향 틀어 급정거", angle: 75, desc: "민첩하게 달리다 외측 신발날로 지면을 깎듯 제동 시, 관절 구부러짐과 좌우 비틀림 마찰이 극단적으로 중복 충돌하여 관절이 무너지기 쉽습니다." },
-            { score: 77, category: "운동", title: "빠르고 잦은 스텝 에어로빅/댄스 춤추기", angle: 80, desc: "쉴 새 없이 도약하고 관절이 기우뚱 기울어지며 발바닥 착지가 이루어져, 하체 인대 결합 조직 및 연골 표면에 연속 충격을 퍼붓습니다." },
-            { score: 80, category: "운동", title: "축구/족구 경기 도중 급선회 및 공 차기", angle: 85, desc: "스파이크 등으로 발바닥이 고정된 상태에서 골반과 상체만 돌려 비틀 때, 접혀있던 무릎뼈 안쪽 조직들이 서로 심각하게 찢어질 만큼 회전 타격을 입습니다." },
-            { score: 85, category: "운동", title: "농구 점프 착지 시 단단하게 땅 디디기", angle: 90, desc: "매우 높은 높이에서 낙하할 때 다리가 스프링 역할을 하려 급히 조여 들므로, 순간 수직 에너지가 척추와 무릎 완충 조직에 엄청난 고통을 줍니다." },
-            { score: 90, category: "운동", title: "시멘트 바닥에서 연속 줄넘기 뛰기", angle: 30, desc: "가볍고 낮게 뛰어서 괜찮을 듯하지만, 단단하고 거친 돌바닥 위를 연속 수백 수천 차례 미세 충격으로 망치질하듯 난타해 연골판 미세 파열을 냅니다." },
-            { score: 95, category: "운동", title: "깊숙이 주저앉는 스쿼트 (풀 스쿼트)", angle: 130, desc: "연골 부착 면이 한계를 넘어 관절 홈 안으로 완전히 끼여 들어간 최악의 조임 각도에서 힘을 쓰기 때문에 미세 파열과 조기 관절 노화를 부릅니다." },
-            { score: 100, category: "운동", title: "높은 단상 위에서 맨바닥으로 뛰어내리기", angle: 100, desc: "낙하 제어 장치 없이 바닥 충격이 관절과 뼈끼리 직접 마주치게 만들어, 단 한 번의 착지만으로도 연골이 파열될 수 있는 대단히 가혹하고 위험한 상황입니다." }
+            { score: 3, category: "일상", title: "침대에 똑바로 누워 다리만 천장 쪽으로 들었다 내리기", angle: 0, desc: "무릎에 하중이 전혀 실리지 않고 허벅지 근육만 부드럽게 수축하므로, 병원 재활이나 회복 운동으로 강력 추천하는 초안전 동작입니다." },
+            { score: 4, category: "운동", title: "수영장에서 엎드려 발차기하기", angle: 10, desc: "물이 몸무게를 지탱해 주어 관절끼리 충격을 입지 않으며, 연골 마모 우려 없이 주변 허벅지 근육을 골고루 단련할 수 있습니다." },
+            { score: 5, category: "일상", title: "침대에 대자로 편하게 누워있기", angle: 0, desc: "온몸의 뼈마디가 중력의 힘에서 풀려나고 전신 피로가 분산되므로, 지쳐있던 연골 세포들이 완전히 영양을 흡수하고 치유되는 최고의 휴식 자세입니다." },
+            { score: 7, category: "운동", title: "안장에 엉덩이 붙이고 실내 자전거 살살 타기", angle: 70, desc: "체중을 안장이 거의 전부 감당해 주므로, 무릎뼈 연골이 압박받는 부담을 아주 미미하게 줄이면서 관절 주위를 가동시켜 줍니다." },
+            { score: 10, category: "일상", title: "의자나 소파에 엉덩이 깊숙이 넣고 바르게 앉아있기", angle: 90, desc: "체중의 일부를 엉덩이와 등받이가 흡수해 주며 상체 뼈대만 가볍게 아래를 향해 내려앉는 수준의 무난한 상태입니다." },
+            { score: 15, category: "일상", title: "집안이나 평지를 천천히 산책하듯 걷기", angle: 15, desc: "발뒤꿈치부터 지면을 사뿐히 디뎌 가므로 지면 반동이 매우 무뎌지며, 관절막 윤활유 공급을 적절히 원활하게 만드는 가벼운 활력 동작입니다." },
+            { score: 18, category: "운동", title: "수영장 물속에서 가슴까지 몸을 담그고 걷기", angle: 20, desc: "물의 가벼운 부력이 몸무게의 수십 퍼센트를 덜어 주므로 다리가 받는 스트레스가 미미하며, 허벅지 앞뒤 탄력까지 효과적으로 늘려줍니다." },
+            { score: 20, category: "일상", title: "출퇴근길이나 마트에서 보통 속도로 걷기", angle: 20, desc: "체중의 약 2배에서 3배에 가깝게 순간 하중이 지나가지만, 양쪽 다리가 하중 시간을 균등하게 분산하므로 무리 없는 튼튼한 표준 행동입니다." },
+            { score: 23, category: "일상", title: "소파나 식탁 의자에서 손 안 짚고 스르륵 일어나기", angle: 80, desc: "다리 근육이 온몸의 추진력을 발생시키기 위해 순간적으로 오므라들면서 무릎뼈 안쪽의 맞물린 부위가 가벼운 마찰 자극을 얻습니다." },
+            { score: 25, category: "운동", title: "헬스장 타원형 걷기 기구(일립티컬) 페달 밟기", angle: 40, desc: "발바닥 전체가 고정식 발판에 계속 닿아 있는 구조이므로, 딱딱한 지면에서 받는 낙하 리듬 충격이 원천 차단된 이상적인 유산소 행동입니다." },
+            { score: 27, category: "일상", title: "동네 완만한 내리막길 걸어 내려가기", angle: 25, desc: "내 몸의 경사 미끄러짐을 방지하고자 브레이크 역할을 하는 대퇴 근육이 긴장하기 시작해, 뒤꿈치가 닿을 때 점차 압박이 축적됩니다." },
+            { score: 30, category: "운동", title: "맨몸으로 무릎을 반만 구부렸다가 펴기 (하프 스쿼트)", angle: 60, desc: "90도 이하의 부드러운 하프 가동 범위는 무릎 앞쪽 압착력이 적절하여, 관절막 두께를 단단하게 유지해 주는 아주 건강한 하체 운동입니다." },
+            { score: 33, category: "일상", title: "아파트 계단 터벅터벅 걸어 올라가기", angle: 50, desc: "상체 질량 전부를 위로 들어올려야 해서, 허벅지 근육의 거대 수축력이 발생하며 대퇴부 관절면 안쪽으로 고압의 긴장이 쏠립니다." },
+            { score: 35, category: "운동", title: "숨이 약간 찰 정도로 빠르게 걷기 (파워 워킹)", angle: 22, desc: "일반 보행에 비해 내딛는 발동작의 속도 탄력이 가속되어 바닥 지면으로부터 무릎 안쪽 뼈로 반동 충격파가 소폭 유입됩니다." },
+            { score: 40, category: "일상", title: "지하철이나 아파트 계단 걸어 내려가기", angle: 60, desc: "디디는 매 순간마다 중력 낙하 충격이 가중되어 체중의 5배 수준 하중이 무릎에 한 번에 집중되므로, 계단은 오르기보다 내려갈 때 더 크게 상합니다." },
+            { score: 43, category: "운동", title: "밖에서 가볍게 툭툭 뛰며 조깅하기", angle: 35, desc: "달릴 때는 두 발이 완벽하게 공중에 부양했다 한쪽 발씩 낙하를 반복하므로 걷기보다 수배 이상의 강한 착지 지동이 연골막에 도달합니다." },
+            { score: 45, category: "운동", title: "한쪽 다리를 앞으로 넓게 벌려 주저앉았다 일어나기 (런지)", angle: 90, desc: "온전한 중량 균형이 거의 하나의 굽혀진 다리에 지탱되므로, 앞무릎이 가도하게 발가락을 벗어나 튀어나올 때 관절 주변이 고도로 긴장합니다." },
+            { score: 50, category: "운동", title: "자전거 탈 때 엉덩이 떼고 서서 힘차게 페달 밟기", angle: 80, desc: "허벅지 뼈가 접혀 비틀어지는 상태에서 오직 발바닥 끝단과 허벅지 관절 하나에만 모든 체중 압박이 온전히 가해지는 높은 강도 구간입니다." },
+            { score: 55, category: "일상", title: "바닥에 엉덩이 안 대고 쪼그려 앉아 일하기 (빨래, 청소 등)", angle: 140, desc: "무릎이 완전 한계치까지 오므라들어 덮개뼈와 주변 부하가 극단적으로 밀착되며, 맷돌을 올려놓고 비비는 것처럼 연골판 뒤를 세게 파괴합니다." },
+            { score: 60, category: "일상", title: "방바닥에 양반다리나 좌식으로 꺾어 앉기", angle: 120, desc: "무릎을 비정상적인 회전 각도로 비틀어 꺾이게 만듭니다. 한국 좌식 생활 특유의 자세로 연골 내측 집중 편마모를 만드는 주범입니다." },
+            { score: 63, category: "운동", title: "아스팔트나 딱딱한 보도블록 위를 본격적으로 달리기", angle: 40, desc: "완충력이 전혀 없는 딱딱한 시멘트면을 내리찧으며 달리므로 미세 뼈 및 연골 외부에 지속적인 진동 충격(Hammering)이 고스란히 쌓입니다." },
+            { score: 68, category: "운동", title: "무거운 배낭 메고 산에서 하산하기 (등산 내리막)", angle: 65, desc: "본인의 몸무게에 등에 얹은 고중량 짐 무게까지 중력 방향 하향 가속이 붙어 연골 내부를 마구 으스러뜨리는 최악의 등산 피로 요인입니다." },
+            { score: 70, category: "운동", title: "어깨에 무거운 바벨 얹고 앉았다 일어나기", angle: 90, desc: "관절이 깊게 구부러진 고압 구간에서 임의로 인공적인 중량까지 얹어 수직으로 억압하므로 연골 세포의 충돌과 무리가 초비상 수준에 달합니다." },
+            { score: 73, category: "운동", title: "배드민턴/테니스 칠 때 셔틀콕 잡으려다 급정거하기", angle: 75, desc: "민첩하게 달리다 외측 신발날로 지면을 깎듯 제동 시, 관절 구부러짐과 좌우 비틀림 마찰이 극단적으로 중복 충돌하여 관절이 무너지기 쉽습니다." },
+            { score: 77, category: "운동", title: "신나는 음악에 맞춰 격렬하게 에어로빅이나 댄스 추기", angle: 80, desc: "쉴 새 없이 도약하고 관절이 기우뚱 기울어지며 발바닥 착지가 이루어져, 하체 인대 결합 조직 및 연골 표면에 연속 충격을 퍼붓습니다." },
+            { score: 80, category: "운동", title: "축구/족구 할 때 디딤발 짚고 턴하거나 강하게 공 차기", angle: 85, desc: "스파이크 등으로 발바닥이 고정된 상태에서 골반과 상체만 돌려 비틀 때, 접혀있던 무릎뼈 안쪽 조직들이 서로 심각하게 찢어질 만큼 회전 타격을 입습니다." },
+            { score: 85, category: "운동", title: "농구할 때 점프 후 땅에 발 디디며 착지하기", angle: 90, desc: "매우 높은 높이에서 낙하할 때 다리가 스프링 역할을 하려 급히 조여 들므로, 순간 수직 에너지가 척추와 무릎 완충 조직에 엄청난 고통을 줍니다." },
+            { score: 90, category: "운동", title: "줄넘기 끊기지 않고 연속으로 쿵쿵 뛰기", angle: 30, desc: "가벼운 점프 같지만 쉴 새 없이 연골을 망치로 두드리는 듯한 누적 충격  등에 큰 피해를 줍니다." },
+            { score: 95, category: "운동", title: "엉덩이가 뒤꿈치에 닿을 정도로 깊숙이 주저앉는 스쿼트", angle: 130, desc: "연골 부착 면이 한계를 넘어 관절 홈 안으로 완전히 끼여 들어간 최악의 조임 각도에서 힘을 쓰기 때문에 미세 파열과 조기 관절 노화를 부릅니다." },
+            { score: 100, category: "운동", title: "높은 상자 위에서 바닥으로 뛰어내리며 뚝 멈추기", angle: 100, desc: "낙하 제어 장치 없이 바닥 충격이 관절과 뼈끼리 직접 마주치게 만들어, 단 한 번의 착지만으로도 연골이 파열될 수 있는 대단히 가혹하고 위험한 상황입니다." }
         ];
 
         let gameStreak = 0;
@@ -682,7 +706,7 @@
                 </defs>
             `;
 
-            // 1. 기준 수직 점선 (0도 즉, 다리를 완전히 쭉 편 상태의 연장선)
+            // 1. 기본 수직 점선 (0도 즉, 다리를 완전히 쭉 편 상태의 연장선)
             svgContent += `
                 <line x1="${jX}" y1="${jY}" x2="${jX}" y2="${jY + boneLength}" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,3" />
             `;
@@ -770,6 +794,12 @@
             document.getElementById("game-screen-over").className = "hidden";
             document.getElementById("game-screen-play").className = "grid grid-cols-2 gap-3 md:gap-8 relative z-10";
             
+            // O/X 피드백 오버레이 리셋
+            const overlay = document.getElementById("game-feedback-overlay");
+            overlay.classList.add("hidden");
+            const badge = document.getElementById("feedback-badge");
+            badge.className = "scale-0 transition-transform duration-300 flex flex-col items-center text-center p-6 md:p-8 rounded-3xl shadow-2xl border-4 max-w-sm w-full animate-fade-in bg-white";
+
             currentLeftIndex = Math.floor(Math.random() * kneeData.length);
             do {
                 currentRightIndex = Math.floor(Math.random() * kneeData.length);
@@ -837,7 +867,7 @@
             
             // 수치 상승 모션 시뮬레이션
             let currentDisplay = 0;
-            const stepTime = 15; 
+            const stepTime = 12; 
             const steps = 10;
             const increment = rightScore / steps;
             const counter = setInterval(() => {
@@ -852,8 +882,31 @@
             }, stepTime);
         }
 
-        // 결과 판정 및 기회 갱신
+        // 결과 판정 및 기회 갱신 + O/X 피드백 오버레이 노출 (더 심플하게 개편)
         function evaluateResult(isCorrect) {
+            const leftData = kneeData[currentLeftIndex];
+            const rightData = kneeData[currentRightIndex];
+            
+            const overlay = document.getElementById("game-feedback-overlay");
+            const badge = document.getElementById("feedback-badge");
+            const icon = document.getElementById("feedback-icon");
+            const title = document.getElementById("feedback-title");
+            const dangerousTitle = document.getElementById("feedback-dangerous-title");
+            const dangerousScore = document.getElementById("feedback-dangerous-score");
+            const nextBtn = document.getElementById("feedback-next-btn");
+            
+            // 더 위험한 동작 (점수가 높은 동작) 연산
+            const moreDangerous = leftData.score > rightData.score ? leftData : rightData;
+            
+            dangerousTitle.textContent = moreDangerous.title;
+            dangerousScore.textContent = `${moreDangerous.score}점`;
+
+            overlay.classList.remove("hidden");
+            setTimeout(() => {
+                badge.classList.remove("scale-0");
+                badge.classList.add("scale-100");
+            }, 50);
+
             if (isCorrect) {
                 playSound('success');
                 gameStreak++;
@@ -865,39 +918,57 @@
                     document.getElementById("game-high-score").textContent = gameHighScore;
                 }
                 
-                // 정답 외곽선 피드백
+                badge.className = "transform transition-transform duration-300 flex flex-col items-center text-center p-6 md:p-8 rounded-3xl shadow-2xl border-4 border-emerald-500 bg-white max-w-sm w-full animate-fade-in";
+                icon.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500 text-6xl md:text-7xl animate-bounce"></i>`;
+                title.textContent = "정답입니다! 🎉";
+                title.className = "text-xl md:text-2xl font-black text-emerald-600 mt-2 mb-4";
+
                 document.getElementById("card-right").className = "bg-emerald-50/80 border-2 border-emerald-500 rounded-2xl md:rounded-3xl p-3 md:p-8 flex flex-col justify-between min-h-[360px] md:min-h-[500px] relative overflow-hidden transition-all duration-500 shadow-md";
-                
-                setTimeout(() => {
-                    currentLeftIndex = currentRightIndex;
-                    do {
-                        currentRightIndex = Math.floor(Math.random() * kneeData.length);
-                    } while (kneeData[currentLeftIndex].score === kneeData[currentRightIndex].score);
-                    
-                    setupCardsUI();
-                }, 2200);
             } else {
                 playSound('fail');
                 gameLives--;
                 updateLivesUI();
                 
-                // 오답 외곽선 피드백
+                badge.className = "transform transition-transform duration-300 flex flex-col items-center text-center p-6 md:p-8 rounded-3xl shadow-2xl border-4 border-rose-500 bg-white max-w-sm w-full animate-fade-in";
+                icon.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-500 text-6xl md:text-7xl animate-bounce"></i>`;
+                title.textContent = "틀렸습니다! 😢";
+                title.className = "text-xl md:text-2xl font-black text-rose-600 mt-2 mb-4";
+
                 document.getElementById("card-right").className = "bg-rose-50 border-2 border-rose-400 rounded-2xl md:rounded-3xl p-3 md:p-8 flex flex-col justify-between min-h-[360px] md:min-h-[500px] relative overflow-hidden transition-all duration-500 shadow-md";
-                
-                if (gameLives <= 0) {
-                    setTimeout(() => {
-                        triggerGameOver();
-                    }, 2200);
-                } else {
-                    setTimeout(() => {
-                        currentLeftIndex = currentRightIndex;
-                        do {
-                            currentRightIndex = Math.floor(Math.random() * kneeData.length);
-                        } while (kneeData[currentLeftIndex].score === kneeData[currentRightIndex].score);
-                        setupCardsUI();
-                    }, 2200);
-                }
             }
+
+            // [수동 조작화] 타이머에 의존하지 않고 사용자가 직접 다음 버튼을 누를 때 진행하도록 변경
+            if (gameLives <= 0) {
+                nextBtn.innerHTML = `최종 결과 확인하기 <i class="fa-solid fa-square-poll-vertical ml-1"></i>`;
+                nextBtn.onclick = () => {
+                    overlay.classList.add("hidden");
+                    badge.classList.add("scale-0");
+                    badge.classList.remove("scale-100");
+                    triggerGameOver();
+                };
+            } else {
+                nextBtn.innerHTML = `다음 문제 풀기 <i class="fa-solid fa-arrow-right ml-1"></i>`;
+                nextBtn.onclick = () => {
+                    hideFeedbackAndNext();
+                };
+            }
+        }
+
+        // O/X 피드백 오버레이를 닫고 다음 문제로 이행
+        function hideFeedbackAndNext() {
+            const overlay = document.getElementById("game-feedback-overlay");
+            const badge = document.getElementById("feedback-badge");
+            
+            badge.classList.remove("scale-100");
+            badge.classList.add("scale-0");
+            overlay.classList.add("hidden");
+            
+            currentLeftIndex = currentRightIndex;
+            do {
+                currentRightIndex = Math.floor(Math.random() * kneeData.length);
+            } while (kneeData[currentLeftIndex].score === kneeData[currentRightIndex].score);
+            
+            setupCardsUI();
         }
 
         // 생명 하트 그리기
